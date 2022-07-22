@@ -1,0 +1,1363 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="你不知道的js（上卷）, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
+    <meta name="description" content="laycoder.com，前端哒哒哒哒哒哒哒">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>你不知道的js（上卷） | lay coder</title>
+    <link rel="icon" type="image/png" href="/medias/avatar.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/avatar.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">lay coder</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/avatar.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">lay coder</div>
+        <div class="logo-desc">
+            
+            laycoder.com，前端哒哒哒哒哒哒哒
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">你不知道的js（上卷）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">笔记</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Javascript/" class="post-category">
+                                Javascript
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-12-20
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="第一部分：作用域和闭包"><a href="#第一部分：作用域和闭包" class="headerlink" title="第一部分：作用域和闭包"></a>第一部分：作用域和闭包</h2><h3 id="第-1-章：作用域是什么"><a href="#第-1-章：作用域是什么" class="headerlink" title="第 1 章：作用域是什么"></a>第 1 章：作用域是什么</h3><p>大部分语言编译器编译原理:<br>① 分词/词法分析<br>② 解析/语法分析<br>③ 代码生成<br>LHS 查询：变量出现在左侧时，<br>RHS 查询：所有非左侧时</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>1、作用域是一套规则，用于确定在何处以及如何查找变量（标识符）。如果查找的目的是对变量进行赋值，那么就会示用 LHS 查询，如果目的是获取变量的值，就会使用 RHS 查询。赋值操作符会导致 LHS 查询。=操作符或调用函数时传入参数的操作都会导致关联作用域的赋值操作。<br>2、JavaScript 引擎首先会在代码执行前对其进行编译，在这个过程中，像 var a = 2 这样的声明会被分解成两个独立的步骤；</p>
+<ol>
+<li> 首先，var a 在其作用域中声明新变量，这会在最开始的阶段，也就是代码执行前进行。</li>
+<li> 接下来，a = 2 会查询（LHS 查询）变量 a 并对其进行赋值。</li>
+</ol>
+<p>3、LHS 和 RHS 查询都会在当前执行作用域中开始，如果有需要（也就是说它们没有找到所需的标识符），就会向上级作用域继续查找目标标识符，这样每次上升一级作用域，最后抵达全局作用域，无论找到或没找到都将停止。<br>4、不成功的 RHS 引用会导致抛出 Reference Error 异常。不成功的 LHS 引用会导致自动隐式地创建一个全局变量（非严格模式下），该变量使用 LHS 引用的目标作为标识符，或者抛出 Reference Error 异常（严格模式下）。<br>5、嵌套的作用域为作用域链，最终指向全局作用域 window</p>
+<h3 id="第-2-章：词法作用域"><a href="#第-2-章：词法作用域" class="headerlink" title="第 2 章：词法作用域"></a>第 2 章：词法作用域</h3><p>作用域查找：<br>作用域查找会在找到第一个匹配的标识符时停止。在多层的嵌套作用域中可以定义同名的标识符，这叫作“遮蔽效应”（内部的标识符“遮蔽”了外部的标识符）。抛开遮蔽效应，作用域查找始终从运行时所处的最内部作用域开始，逐级向外或者向上进行，直到遇见第一个匹配的标识符为止。<br>全局变量会自动成为全局对象（比如浏览器中的 window 对象）的属性，因此可以不直接通过全局对象的词法名称，而是间接地通过对全局对象属性的引用来对其进行访问。<br>欺骗词法：<br>欺骗词法作用域会导致性能下降<br>eval(…)函数可以接受一个字符串为参数，并将其中的内容视为好像在书写时就在于程序中这个位置的代码；严格模式 eval(…)在运行时有其字的词法作用域，无法修改其所在的作用域。<br>with 可以将一个没有或有多个属性的对象处理为一个完全隔离的词法作用域，因此这个对象的属性也会被处理为定义在这个作用域中的词法标识符。<br>尽管 with 块可以将一个对象处理为词法作用域，但是这个块内部正常的 var 声明并不会被限制在这个块的作用域中，而是被添加到 with 所处的函数作用域中。</p>
+<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><p>词法作用域是一套关于引擎如何寻找变量以及会在何处找到变量的规则。词法作用域最重要的特征是它的定义过程发生在代码的书写阶段<br>词法作用域意味着作用域是由书写代码时函数声明的位置来决定的。编译的词法分析阶段基本能够知道全部标识符在哪里以及是如何声明的，从而能够预测在执行过程中如何对它进行查找。<br>JavaScript 中有两个机制可以“欺骗”词法作用域：eval(…)和 with。前者可以对一段包含一个或多个声明的“代码”字符串进行演算，并借此来修改已经存在的词法作用域（在运行时）。后者本质上是通过将一个对象的引用当作作用域来处理，将对象和属性当作作用域中的标识符来处理，从而创建了一个新的词法作用域（同样是运行时）。<br>这两个机制的副作用是引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认为这样的优化是无效的。使用这其中任何一个机制都将导致代码运行变慢。不要使用它们。</p>
+<h3 id="第-3-章：函数作用域和块作用域"><a href="#第-3-章：函数作用域和块作用域" class="headerlink" title="第 3 章：函数作用域和块作用域"></a>第 3 章：函数作用域和块作用域</h3><h4 id="函数中的作用域"><a href="#函数中的作用域" class="headerlink" title="函数中的作用域"></a>函数中的作用域</h4><p>函数作用域的含义是指，属于这个函数的全部变量都可以在整个函数的范围内使用及复用（事实上在嵌套的作用域中也可以使用）。这种设计方案是非常有用的，能充分利用 JavaScript 变量可以根据需要改变值类型的“动态”特性。<br>但与此同时，如果不细心处理那些可以在整个作用域范围内被访问的变量，可能会带来意想不到的问题。<br>区分函数声明和表达式最简单的方法是看 function 关键字出现在声明中的位置（不仅仅是一行代码，而是整个声明中的位置。）如果 function 是声明中的第一个词，那么就是一个函数声明，否则就是一个函数表达式。它们之间最重要的区别是它们的名称标识符将会绑定在何处。</p>
+<h4 id="隐藏内部实现"><a href="#隐藏内部实现" class="headerlink" title="隐藏内部实现"></a>隐藏内部实现</h4><p>可以把变量和函数包裹在一个函数的作用域中，然后用这个作用域来“隐藏”他们<br><strong>规避冲突</strong>：“隐藏”作用域中的变量和函数所带来的另一个好处，是可以避免同名标识符之间的冲突，两个标识符可能具有相同的名字但用途却不一样，无意间可能造成命名冲突。冲突会导致变量的值被意外覆盖。<br><strong>1. 全局命名空间：</strong>在全局作用域中声明一个名字足够独特的变量，通常是一个对象。这个对象被用作库的命名空间，所有需要暴露给外界的功能都会成为这个对象（命名空间）的属性，而不是将自己的标识符暴露在顶级的词法作用域中。<br><strong>2. 模块管理：</strong>另外一种避免冲突的办法和现代的模块机制很接近，就是从众多模块管理器中挑选一个来使用。使用这些工具，任何库都无需将标识符加入到全局作用域中。而是通过依赖管理器的机制将库的标识符现世显式地导入到另外一个特定的作用域中。</p>
+<h4 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h4><p>函数是 JavaScript 中最常见的作用域单元。本质上，声明在一个函数内部的变量或函数会在所处的作用域中“隐藏”起来，这是有意为之的良好软件的设计原则。<br>但函数不是唯一的作用域单元。块作用域指的是变量和函数不仅可以属于所处的作用域，也可以属于某个代码块（通常指{…}内部）。<br>从 ES3 开始，try/catch 结构在 catch 分句中具有块作用域。<br>在 ES6 中引入了 let 关键字（var 关键字的表亲），用来在任意代码块中声明变量。if(…){let a =2;} 会声明一个劫持了 if 的{…}块的变量，并且将变量添加到这个块中。<br>有些人认为块作用域不应该完全作为函数作用域的替代方案。两种功能应该同步存在，开发者可以并且也应该根据需要选择使用何种作用域，创造可读，可维护的优良代码。</p>
+<h4 id="匿名和具名函数"><a href="#匿名和具名函数" class="headerlink" title="匿名和具名函数"></a>匿名和具名函数</h4><p>函数表达式可以是匿名的，而函数声明则不可以省略函数名——在 JavaScript 的语法中这是非法的。<br>匿名函数表达式书写起来简单快捷，很多库和工具也倾向鼓励使用这种风格的代码。但是它也有几个缺点需要考虑：</p>
+<ol>
+<li>匿名函数在栈追踪中不会显示出有意义的函数名，使得调试很困难。</li>
+<li>如果没有函数名，当函数需要引用自身时只能使用已经过期的 arguments.callee 引用，比如在递归中。另一个函数需要引用自身的例子，是在事件触发后事件监听器需要解绑自身。</li>
+<li>匿名函数省略了对于代码可读性/可理解性很重要的函数名。一个描述性的名称可以让代码不言自明。</li>
+</ol>
+<p>行内函数表达式非常强大且有用——匿名和具名之间的区别并不会对这点有任何影响。给函数表达式指定一个函数名可以有效解决以上问题。</p>
+<h4 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h4><p>由于函数被包含在一对（）括号内部，因此成为了一个表达式，通过在末尾加上另外一个（）可以立即执行这个函数，比如（function foo（）{})()/第一个（）将函数变成表达式，第二个（）执行了这个函数。<br>改进的形式：(function(){}())。两种形式在功能上是一致的。<br>进阶用法：把它们当作函数调用并传递参数进去。<br>(function (global){…})(window)<br>还有一种变化的用途是倒置代码的运行顺序，将需要运行的函数放在第二位，在立即执行函数执行之后当作参数传递进去。</p>
+<pre><code>(functionIIFE(def)&#123;
+  def(window);
+  &#125;)(functiondef(global)&#123;
+    vara=3;
+    console.log(a);//3
+    console.log(global.a);//2
+  &#125;);
+</code></pre>
+<h4 id="块作用域"><a href="#块作用域" class="headerlink" title="块作用域"></a>块作用域</h4><p>使用 let 进行的声明不会在块作用域中进行提升。声明的代码被运行之前，声明并不 “存在”。<br>函数是 JavaScript 中最常见的作用域单元。本质上，生命在一个函数内部的变量或函数会在所处的作用域中“隐藏”起来，这是有意为之的良好软件的设计原则。<br>但函数不是唯一的作用域单元。块作用域指的是变量和函数不仅属于所处的作用域，也可以属于某个代码块（通常指{…}内部）。<br>从 ES3 开始，try/catch 结构在 catch 分句中具有块作用域。<br>从 ES6 中引入了 let 关键字（var 关键字的表亲），用来了在任意代码块中声明变量。if（…）{let a = 2；}会声明一个劫持了 if 的{…}块的变量，并且将变量添加到这个块中。</p>
+<h3 id="第-4-章：提升"><a href="#第-4-章：提升" class="headerlink" title="第 4 章：提升"></a>第 4 章：提升</h3><h4 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h4><p>我们习惯将 var a = 2;看作一个声明，而实际上 JavaScript 引擎并不这么认为。它将 var a 和 a = 2 当作两个单独的声明，第一个是编译阶段的任务，而第二个则是执行阶段的任务。<br>这意味着无论作用域中的声明出现在什么地方，都将在代码本身被执行前首先进行处理。可以将这个过程形象地想象成所有的声明（变量和函数）都会被“移动”到各自作用域的最顶端，这个过程被称为提升。<br>要注意避免重复声明，特别是当普通的 var 声明和函数声明混合在一起的时候，否则会引起很多危险的问题！<br>函数声明和变量声明都会被提升。但是一个值得注意的细节（这个细节可以出现在有多个“重复”声明的代码中）是函数会首先被提升，然后才是变量。<br>声明本身会被提升，而包括函数表达式的赋值在内的赋值操作并不会提升。</p>
+<h3 id="第-5-章：作用域闭包"><a href="#第-5-章：作用域闭包" class="headerlink" title="第 5 章：作用域闭包"></a>第 5 章：作用域闭包</h3><p>当函数可以记住并访问所在的词法作用域，即使函数是在当前词法作用域之外执行，这时就产生了闭包。该函数对所在词法作用域的引用就叫做闭包</p>
+<h4 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h4><pre><code>functionCoolModule()&#123;
+  var something=&quot;cool&quot;;
+  var another=[1,2,3];
+  function doSomething()&#123;
+    console.log(something);
+  &#125;
+  function doAnother()&#123;
+    console.log(another.join(&quot;!&quot;));
+  &#125;
+  return &#123;
+    doSomething: doSomething,
+    doAnother: doAnother
+  &#125;;
+&#125;
+var foo = CoolModule();
+foo.doSomething();//cool
+foo.doAnother();//1!2!3
+</code></pre>
+<p>这个模式在 JavaScript 中被称为模块。</p>
+<ol>
+<li> 必须有外部的封闭函数，该函数必须至少被调用一次（每次调用都会创建一个新的模块实例）。</li>
+<li> 封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态。</li>
+</ol>
+<p>一个具有函数属性的对象本身并不是真正的模块。从方便观察的角度看，一个从函数调用所返回的，只有数据属性而没有闭包函数的对象并不是真正的模块。</p>
+<p>单例模式：</p>
+<pre><code>var foo = (function CoolModule()&#123;
+    var something=&quot;cool&quot;;
+    var another=[1,2,3];
+    function doSomething()&#123;
+      console.log(something);
+    &#125;
+    function doAnother()&#123;
+      console.log(another.join(&quot;!&quot;));
+    &#125;
+    return &#123;
+      doSomething: doSomething,
+      doAnother: doAnother
+    &#125;;
+  &#125;)();
+  foo.doSomething();//cool
+  foo.doAnother();//1!2!3
+</code></pre>
+<h4 id="现代的模块机制"><a href="#现代的模块机制" class="headerlink" title="现代的模块机制"></a>现代的模块机制</h4><pre><code>var MyModules = (function Manager() &#123;
+  var modules = &#123;&#125;
+  function define(name, deps, impl) &#123;
+    for (var i = 0; i &lt; deps.length; i++) &#123;
+      deps[i] = modules[deps[i]]
+    &#125;
+    modules[name] = impl.apply(impl, deps)
+  &#125;
+  function get(name) &#123;
+    return modules[name]
+  &#125;
+  return &#123; define, get &#125;
+&#125;)()
+MyModules.define(&#39;bar&#39;, [], function () &#123;
+  function hello(who) &#123;
+    return &#39;Letmeintroduce:&#39; + who
+  &#125;
+  return &#123; hello &#125;
+&#125;)
+MyModules.define(&#39;foo&#39;, [&#39;bar&#39;], function (bar) &#123;
+  var hungry = &#39;hippo&#39;
+  function awesome() &#123;
+    console.log(bar.hello(hungry).toUpperCase())
+  &#125;
+  return &#123; awesome &#125;
+&#125;)
+var bar = MyModules.get(&#39;bar&#39;)
+var foo = MyModules.get(&#39;foo&#39;)
+console.log(bar.hello(&#39;hippo&#39;)) //Let me introduce: hippofoo.awesome();
+foo.awesome() //LETMEINTRODUCE:HIPPO
+</code></pre>
+<h4 id="未来的模块机制"><a href="#未来的模块机制" class="headerlink" title="未来的模块机制"></a>未来的模块机制</h4><p>ES6 中为模块增加了一级语法支持。但通过模块系统进行加载时，ES6 会将文件当作独立的模块来处理。每个模块都可以导入其他模块或特定的 API 成员，同样也可以导出自己的 API 成员。<br>ES6 的模块没有“行内”格式，必须被定义在独立的文件中（一个文件一个模块）。浏览器或引擎有一个默认的“模块加载器”可以在导入模块时异步地加载模块文件。<br>import 可以将一个模块中的一个或多个 API 导入到当前作用域中，并分别绑定在一个变量上（在我们的例子里是 hello）。module 会将整个模块的 API 导入并绑定到一个变量上（在我们的例子里是 foo 和 bar）。export 会将当前模块的一个标识符（变量、函数）导出为公共 API。这些操作可以在模块定义中根据需要使用任意多次。<br>模块文件中的内容会被当作好像包含在作用域闭包中一样来处理，就和前面介绍的函数闭包模块一样。</p>
+<h4 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h4><p>当函数可以记住并访问所在的词法作用域，即使函数是在当前词法作用域之外执行，这时就产生了闭包。<br>模块有两个主要特征：<br>（1）为创建内部作用域而调用了一个包装函数；<br>（2）包装函数的返回值必须至少包括一个对内部函数的引用，这样就会创建涵盖整个包装函数内部作用域的闭包。</p>
+<h2 id="第二部分：this-和对象原型"><a href="#第二部分：this-和对象原型" class="headerlink" title="第二部分：this 和对象原型"></a>第二部分：this 和对象原型</h2><h3 id="第-1-章：关于-this"><a href="#第-1-章：关于-this" class="headerlink" title="第 1 章：关于 this"></a>第 1 章：关于 this</h3><h4 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h4><p>this 既不指向函数自身也不指向函数的词法作用域。<br>this 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用。</p>
+<h3 id="第-2-章：this-全面解析"><a href="#第-2-章：this-全面解析" class="headerlink" title="第 2 章：this 全面解析"></a>第 2 章：this 全面解析</h3><h4 id="调用位置"><a href="#调用位置" class="headerlink" title="调用位置"></a>调用位置</h4><p>调用位置就是函数在代码中被调用的位置（而不是声明的位置）</p>
+<h4 id="绑定规则"><a href="#绑定规则" class="headerlink" title="绑定规则"></a>绑定规则</h4><p>1、默认绑定<br>独立函数调用。可以把这条规则看作是无法应用其他规则时的默认规则。如果函数体处于严格模式，this 会被绑定到 undefined，否则 this 会被绑定到全局对象。<br>2、隐式绑定<br>当函数引用有上下文对象时，隐式绑定规则会把函数调用中的 this 绑定到这个上下文对象。<br>3、显式绑定<br>通过 call(..)或者 apply(..)或者 bind(..)<br>4、new 绑定<br>使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。</p>
+<ol>
+<li>创建（或者说构造）一个全新的对象。</li>
+<li>这个新对象会被执行[[原型]]连接。</li>
+<li>这个新对象会绑定到函数调用的 this。</li>
+<li>如果函数没有返回其他对象，那么 new 表达式中的函数调用会自动返回这个新对象。</li>
+</ol>
+<p>使用 new 来调用 foo(..)时，我们会构造一个新对象并把它绑定到 foo(..)调用中的 this 上。</p>
+<h4 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h4><ol>
+<li>函数是否在 new 中调用（new 绑定）？如果是的话 this 绑定的是新创建的对象。<br>var bar = new foo()</li>
+<li>函数是否通过 call、apply（显式绑定）或者硬绑定调用？如果是的话，this 绑定的是指定的对象。<br>var bar = foo.call(obj2)</li>
+<li>函数是否在某个上下文对象中调用（隐式绑定）？如果是的话，this 绑定的是那个上下文对象。<br>var bar = obj1.foo()</li>
+<li>如果都不是的话，使用默认绑定。如果在严格模式下，就绑定到 undefined，否则绑定到全局对象。<br>var bar = foo()</li>
+</ol>
+<h4 id="绑定例外"><a href="#绑定例外" class="headerlink" title="绑定例外"></a>绑定例外</h4><ol>
+<li><p>被忽略的 this<br> 使用 null 来忽略 this 绑定可能产生一些副作用。<br> 安全用法：Object.create(null)和{}很像，但是并不会创建 Object.prototype 这个委托，所以它比{}“更空”</p>
+</li>
+<li><p>间接引用</p>
+<pre><code> function foo() &#123;
+   console.log(this.a);
+ &#125;
+ var a = 2;
+ var o = &#123; a: 3, foo: foo &#125;;
+ var p = &#123; a: 4 &#125;;
+ o.foo(); //3
+ (p.foo = o.foo)(); //2
+</code></pre>
+<p> 赋值表达式 p.foo=o.foo 的返回值是目标函数的引用，因此调用位置是 foo()而不是 p.foo()或者 o.foo()。根据我们之前说过的，这里会应用默认绑定。</p>
+</li>
+<li><p>软绑定</p>
+<pre><code> if (!Function.prototype.softBind) &#123;
+   Function.prototype.softBind = function (obj) &#123;
+     var fn = this //捕获所有curried参数
+     var curried = [].slice.call(arguments, 1)
+     var bound = function () &#123;
+       return fn.apply(
+         !this || this === (window || global)
+           ? obj
+           : this.curried.concat.apply(curried, arguments)
+       )
+     &#125;
+     bound.prototype = Object.create(fn.prototype)
+     return bound
+   &#125;
+ &#125;
+ function foo() &#123;
+   console.log(&#39;name:&#39; + this.name)
+ &#125;
+ var obj = &#123; name: &#39;obj&#39; &#125;,
+   obj2 = &#123; name: &#39;obj2&#39; &#125;,
+   obj3 = &#123; name: &#39;obj3&#39; &#125;
+ var fooOBJ = foo.softBind(obj)
+ fooOBJ() //name:obj
+ obj2.foo = foo.softBind(obj)
+ obj2.foo() //name:obj2&lt;----看！！！
+ fooOBJ.call(obj3) //name:obj3&lt;----看！
+ setTimeout(obj2.foo, 10) //name:obj&lt;----应用了软绑定
+</code></pre>
+<p> 可以看到，软绑定版本的 foo()可以手动将 this 绑定到 obj2 或者 obj3 上，但如果应用默认绑定，则会将 this 绑定到 obj。</p>
+</li>
+</ol>
+<h4 id="this-词法"><a href="#this-词法" class="headerlink" title="this 词法"></a>this 词法</h4><p>箭头函数不使用 this 的四种标准规则，而是根据外层（函数或者全局）作用域来决定 this。</p>
+<h4 id="小结-6"><a href="#小结-6" class="headerlink" title="小结"></a>小结</h4><p>如果要判断一个运行中函数的 this 绑定，就需要找到这个函数的直接调用位置。找到之后就可以顺序应用下面这四条规则来判断 this 的绑定对象。</p>
+<ol>
+<li>由 new 调用？绑定到新创建的对象。</li>
+<li>由 call 或者 apply（或者 bind）调用？绑定到指定的对象。</li>
+<li>由上下文对象调用？绑定到那个上下文对象。</li>
+<li>默认：在严格模式下绑定到 undefined，否则绑定到全局对象。</li>
+</ol>
+<p>一定要注意，有些调用可能在无意中使用默认绑定规则。如果想“更安全”地忽略 this 绑定，你可以使用一个 DMZ 对象，比如 ø=Object.create(null)，以保护全局对象。<br>ES6 中的箭头函数并不会使用四条标准的绑定规则，而是根据当前的词法作用域来决定 this，具体来说，箭头函数会继承外层函数调用的 this 绑定（无论 this 绑定到什么）。</p>
+<h3 id="第-3-章：对象"><a href="#第-3-章：对象" class="headerlink" title="第 3 章：对象"></a>第 3 章：对象</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>对象可以通过两种形式定义：声明（文字）形式和构造形式。</p>
+<p>文字语法</p>
+<pre><code>var myObj=&#123;
+    key: value
+    //...
+&#125;;
+</code></pre>
+<p>构造形式</p>
+<pre><code>var myObj = newObject();
+myObj.key = value;
+</code></pre>
+<p>构造形式和文字形式生成的对象是一样的。唯一的区别是，在文字声明中你可以添加多个键/值对，但是在构造形式中你必须逐个添加属性。</p>
+<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><p>对象是 JavaScript 的基础。在 JavaScript 中一共有六种主要类型（术语是“语言类型”）：</p>
+<ul>
+<li>string</li>
+<li>number</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+<li>object</li>
+</ul>
+<p>原理是这样的，不同的对象在底层都表示为二进制，在 JavaScript 中二进制前三位都为 0 的话会被判断为 object 类型，null 的二进制表示是全 0，自然前三位也是 0，所以执行 typeof 时会返回“object”</p>
+<h5 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h5><ul>
+<li>String</li>
+<li>Number</li>
+<li>Boolean</li>
+<li>Object</li>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+<li>Error</li>
+</ul>
+<p>在 JavaScript 中，它们实际上只是一些内置函数。这些内置函数可以当作构造函数来使用，从而可以构造一个对应子类型的新对象。<br>typeof 以上 为’function’</p>
+<pre><code>var strPrimitive = &#39;Iamastring&#39; // 字面量
+typeof strPrimitive //&quot;string&quot;
+strPrimitive instanceof String //false
+var strObject = new String(&#39;Iamastring&#39;)
+typeof strObject //&quot;object&quot;
+strObject instanceof String //true
+//检查sub-type对象
+Object.prototype.toString.call(strObject) //[object String]
+</code></pre>
+<p>引擎自动把字面量转换成 String 对象，所以可以访问属性和方法。</p>
+<p>null 和 undefined 没有对应的构造形式，它们只有文字形式。相反，Date 只有构造，没有文字形式。</p>
+<p>对于 Object、Array、Function 和 RegExp（正则表达式）来说，无论使用文字形式还是构造形式，它们都是对象，不是字面量。</p>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><p>1、可计算属性名<br>ES6 增加了可计算属性名，可以在文字形式中使用[]包裹一个表达式来当作属性名</p>
+<p>2、属性与方法<br>即使你在对象的文字形式中声明一个函数表达式，这个函数也不会“属于”这个对象——它们只是对于相同函数对象的多个引用。<br>每次访问对象的属性就是属性访问。如果属性访问返回的是一个函数，那它也并不是一个“方法”。属性访问返回的函数和其他函数没有任何区别（除了可能发生的隐式绑定 this<br>3、数组<br>4、复制对象<br>深复制：JSON.parse(JSON.stringify(someObj))<br>ES6 定义了 Object.assign(..)方法来实现浅复制。由于 Object.assign(..)就是使用=操作符来赋值，所以源对象属性的一些特性（比如 writable）不会被复制到目标对象。<br>5、属性描述符<br>从 ES5 开始，所有的属性都具备了属性描述符。</p>
+<pre><code>var myObject = &#123;
+      a: 2
+    &#125;;
+Object.getOwnPropertyDescriptor(myObject,&quot;a&quot;);
+//&#123;
+  //value: 2,
+  //writable: true, 决定是否可以修改属性的值。
+  //enumerable: true,
+  只要属性是可配置的，就可以使用defineProperty(..)方法
+  来修改属性描述符把configurable修改成false是单向操作，无法撤销！
+  //configurable: true 属性是否会出现在对象的属性枚举中
+//&#125;
+</code></pre>
+<p>这个普通的对象属性对应的属性描述符（也被称为“数据描述符”，因为它只保存一个数据值）可不仅仅只是一个 2。它还包含另外三个特性：writable（可写）、enumerable（可枚举）和 configurable（可配置）。即便属性是 configurable:false，我们还是可以把 writable 的状态由 true 改为 false，但是无法由 false 改为 true。除了无法修改，configurable:false 还会禁止删除这个属性</p>
+<p>在创建普通属性时属性描述符会使用默认值，我们也可以使用 Object.defineProperty(..)来添加一个新属性或者修改一个已有属性（如果它是 configurable）并对特性进行设置。</p>
+<p>6、不变性</p>
+<ol>
+<li><p>对象常量<br> 结合 writable:false 和 configurable:false 就可以创建一个真正的常量属性（不可修改、重定义或者删除）</p>
+</li>
+<li><p>禁止扩展<br> Object.preventExtensions(myObject);</p>
+<pre><code>  var myObject = &#123;
+      a:2
+  &#125;;
+  Object.preventExtensions(myObject);
+  myObject.b=3;
+  myObject.b;//undefined
+</code></pre>
+</li>
+<li><p>密封<br> Object.seal(..)会创建一个“密封”的对象，这个方法实际上会在一个现有对象上调用 Object.preventExtensions(..)并把所有现有属性标记为 configurable:false。所以，密封之后不仅不能添加新属性，也不能重新配置或者删除任何现有属性（虽然可以修改属性的值）。</p>
+</li>
+<li><p>冻结<br> Object.freeze(..)会创建一个冻结对象，这个方法实际上会在一个现有对象上调用 Object.seal(..)并把所有“数据访问”属性标记为 writable:false，这样就无法修改它们的值。</p>
+<p> 这个方法是你可以应用在对象上的级别最高的不可变性，它会禁止对于对象本身及其任意直接属性的修改（不过就像我们之前说过的，这个对象引用的其他对象是不受影响的）。你可以“深度冻结”一个对象，具体方法为，首先在这个对象上调用 Object.freeze(..)，然后遍历它引用的所有对象并在这些对象上调用 Object.freeze(..)。</p>
+</li>
+</ol>
+<p>7、[[Get]]<br>对象默认的内置[[Get]]操作首先在对象中查找是否有名称相同的属性，如果找到就会返回这个属性的值。<br>如果没有找到名称相同的属性则遍历可能存在的[[Prototype]]链，也就是原型链。无论如何都没有找到名称相同的属性，那[[Get]]操作会返回值 undefined</p>
+<p>8、[[Put]]<br>[[Put]]算法大致会检查下面这些内容。</p>
+<ol>
+<li>属性是否是访问描述符（参见 3.3.9 节）？如果是并且存在 setter 就调用 setter。</li>
+<li>属性的数据描述符中 writable 是否是 false？如果是，在非严格模式下静默失败，在严格模式下抛出 TypeError 异常。</li>
+<li>如果都不是，将该值设置为属性的值。</li>
+</ol>
+<p>如果对象中不存在这个属性，[[Put]]操作会更加复杂。</p>
+<p>9、Getter 和 Setter<br>对象默认的[[Put]]和[[Get]]操作分别可以控制属性值的设置和获取。<br>在 ES5 中可以使用 getter 和 setter 部分改写默认操作，但是只能应用在单个属性上，无法应用在整个对象上。getter 是一个隐藏函数，会在获取属性值时调用。setter 也是一个隐藏函数，会在设置属性值时调用。</p>
+<p>10、存在性</p>
+<pre><code>var myObject= &#123;
+    a: 2
+&#125;;
+(&quot;a&quot;inmyObject);//true
+(&quot;b&quot;inmyObject);//false
+myObject.hasOwnProperty(&quot;a&quot;);//true
+myObject.hasOwnProperty(&quot;b&quot;);//false
+</code></pre>
+<p>in 操作符会检查属性是否在对象及其[[Prototype]]原型链中。相比之下，hasOwnProperty(..)只会检查属性是否在 myObject 对象中，不会检查[[Prototype]]链。</p>
+<p>所有的普通对象都可以通过对于 Object.prototype 的委托来访问 hasOwnProperty(..)，但是有的对象可能没有连接到 Object.prototype（通过 Object.create(null)来创建）。在这种情况下，形如 myObejct.hasOwnProperty(..)就会失败。这时可以使用一种更加强硬的方法来进行判断：Object.prototype.hasOwnProperty.call(myObject,”a”)，它借用基础的 hasOwnProperty(..)方法并把它显式绑定到 myObject 上</p>
+<ol>
+<li><p>枚举</p>
+<pre><code> var myObject=&#123;&#125;;
+ Object.defineProperty(
+   myObject,
+   &quot;a&quot;,//让a像普通属性一样可以枚举
+   &#123;enumerable:true,value:2&#125;
+ );
+ Object.defineProperty(
+   myObject,
+   &quot;b&quot;,//让 b 不可枚举
+   &#123;enumerable:false,value:3&#125;
+ );
+ myObject.propertyIsEnumerable(&quot;a&quot;);//true
+ myObject.propertyIsEnumerable(&quot;b&quot;);//false
+ Object.keys(myObject);//[&quot;a&quot;]
+ Object.getOwnPropertyNames(myObject);//[&quot;a&quot;,&quot;b&quot;]
+</code></pre>
+</li>
+</ol>
+<p>propertyIsEnumerable(..)会检查给定的属性名是否直接存在于对象中（而不是在原型链上）并且满足 enumerable:true。<br>Object.keys(..)会返回一个数组，包含所有可枚举属性，Object.getOwnPropertyNames(..)会返回一个数组，包含所有属性，无论它们是否可枚举。<br>in 和 hasOwnProperty(..)的区别在于是否查找[[Prototype]]链，然而，Object.keys(..)和 Object.getOwnPropertyNames(..)都只会查找对象直接包含的属性。</p>
+<h4 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h4><h4 id="小结-7"><a href="#小结-7" class="headerlink" title="小结"></a>小结</h4><p>JavaScript 中的对象有字面形式（比如 vara={..}）和构造形式（比如 vara=newArray(..)）。字面形式更常用，不过有时候构造形式可以提供更多选项。<br>对象有包括 function 在内的子类型，不同子类型具有不同的行为，比如内部标签[objectArray]表示这是对象的子类型数组。<br>对象就是键/值对的集合。可以通过.propName 或者[“propName”]语法来获取属性值。访问属性时，引擎实际上会调用内部的默认[[Get]]操作（在设置属性值时是[[Put]]），[[Get]]操作会检查对象本身是否包含这个属性，如果没找到的话还会查找[[Prototype]]链（参见第 5 章）。<br>是对象的子类型数组。<br>属性的特性可以通过属性描述符来控制，比如 writable 和 configurable。此外，可以使用 Object.preventExtensions(..)、Object.seal(..)和 Object.freeze(..)来设置对象（及其属性）的不可变性级别。<br>属性不一定包含值——它们可能是具备 getter/setter 的“访问描述符”。此外，属性可以是可枚举或者不可枚举的，这决定了它们是否会出现在 for..in 循环中。<br>可以使用 ES6 的 for..of 语法来遍历数据结构（数组、对象，等等）中的值，for..of 会寻找内置或者自定义的@@iterator 对象并调用它的 next()方法来遍历数据值。</p>
+<h3 id="第-4-章：混合对象“类”"><a href="#第-4-章：混合对象“类”" class="headerlink" title="第 4 章：混合对象“类”"></a>第 4 章：混合对象“类”</h3><h4 id="类理论"><a href="#类理论" class="headerlink" title="类理论"></a>类理论</h4><p>类/继承描述了一种代码的组织结构形式——一种在软件中对真实世界中问题领域的建模方法。</p>
+<h4 id="小结-8"><a href="#小结-8" class="headerlink" title="小结"></a>小结</h4><p>类是一种设计模式。许多语言提供了对于面向类软件设计的原生语法。JavaScript 也有类似的语法，但是和其他语言中的类完全不同。<br>类意味着复制。<br>传统中的类被实例化时，它的行为会被复制到实例中。类被继承时，行为也会被复制到子类中。<br>多态（在继承链的不同层次名称相同但是功能不同的函数）看起来似乎是子类引用父类，但是本质上引用的其实是复制的结果。<br>JavaScript 并不会（像类那样）自动创建对象的副本。<br>混入模式（无论显式还是隐式）可以用来模拟类的复制行为，但是通常会产生丑陋并且脆弱的语法，比如显示伪多态（OtherObj.methodName.call(this,…)），这会让代码更加难懂并且难以维护。<br>此外，显式混入实际上无法完全模拟类的复制行为，因为对象（和函数！别忘了函数也是对象）只能复制引用，无法复制被引用的对象或者函数本身。忽视这一点会导致许多问题。<br>总的来说，在 JavaScript 中模拟类是得不偿失的，虽然能解决当前的问题，但是可能会埋下更多的隐患。</p>
+<h3 id="第-5-章：原型"><a href="#第-5-章：原型" class="headerlink" title="第 5 章：原型"></a>第 5 章：原型</h3><h4 id="Prototype"><a href="#Prototype" class="headerlink" title="[[Prototype]]"></a>[[Prototype]]</h4><p>JavaScript 中的对象有一个特殊的[[Prototype]]内置属性，其实就是对于其他对象的引用。几乎所有的对象在创建时[[Prototype]]属性都会被赋予一个非空的值。<br>当你通过各种语法进行属性查找时都会查找[[Prototype]]链，直到找到属性或者查找完整条原型链。</p>
+<p>1、Object.prototype<br>所有普通的[[Prototype]]链最终都会指向内置的 Object.prototype。<br>2、属性设置和屏蔽<br>如果属性名 foo 既出现在 myObject 中也出现在 myObject 的[[Prototype]]链上层，那么就会发生屏蔽。myObject 中包含的 foo 属性会屏蔽原型链上层的所有 foo 属性，因为 myObject.foo 总是会选择原型链中最底层的 foo 属性。<br>如果 foo 不直接存在于 myObject 中而是存在于原型链上层时 myObject.foo=”bar”会出现的三种情况。</p>
+<ol>
+<li>如果在[[Prototype]]链上层存在名为 foo 的普通数据访问属性并且没有被标记为只读（writable:false），那就会直接在 myObject 中添加一个名为 foo 的新属性，它是屏蔽属性。</li>
+<li>如果在[[Prototype]]链上层存在 foo，但是它被标记为只读（writable:false），那么无法修改已有属性或者在 myObject 上创建屏蔽属性（这个限制只存在于=赋值中，使用 Object.defineProperty(..)并不会受到影响。）。如果运行在严格模式下，代码会抛出一个错误。否则，这条赋值语句会被忽略。总之，不会发生屏蔽。</li>
+<li>如果在[[Prototype]]链上层存在 foo 并且它是一个 setter（参见第 3 章），那就一定会调用这个 setter。foo 不会被添加到（或者说屏蔽于）myObject，也不会重新定义 foo 这个 setter。</li>
+</ol>
+<h4 id="“类”"><a href="#“类”" class="headerlink" title="“类”"></a>“类”</h4><p>在 JavaScript 中，类无法描述对象的行为，（因为根本就不存在类！）对象直接定义自己的行为。再说一遍，JavaScript 中只有对象。<br>1、“类”函数<br>2、“构造函数”<br>函数不是构造函数，但是当且仅当使用 new 时，函数调用会变成“构造函数调用”<br>3、技术<br>实际上，对象的.constructor 会默认指向一个函数，这个函数可以通过对象的.prototype 引用。“constructor”和“prototype”这两个词本身的含义可能适用也可能不适用。最好的办法是记住这一点“constructor 并不表示被构造”。<br>.constructor 并不是一个不可变属性。它是不可枚举的，但是它的值是可写的（可以被修改）。此外，你可以给任意[[Prototype]]链中的任意对象添加一个名为 constructor 的属性或者对其进行修改，你可以任意对其赋值。<br>.constructor 是一个非常不可靠并且不安全的引用。通常来说要尽量避免使用这些引用。</p>
+<h4 id="（原型）继承"><a href="#（原型）继承" class="headerlink" title="（原型）继承"></a>（原型）继承</h4><p>Bar.prototype=Foo.prototype 并不会创建一个关联到 Bar.prototype 的新对象，它只是让 Bar.prototype 直接引用 Foo.prototype 对象。因此当你执行类似 Bar.prototype.myLabel=…的赋值语句时会直接修改 Foo.prototype 对象本身。显然这不是你想要的结果，否则你根本不需要 Bar 对象，直接使用 Foo 就可以了，这样代码也会更简单一些。<br>Bar.prototype=newFoo()的确会创建一个关联到 Bar.prototype 的新对象。但是它使用了 Foo(..)的“构造函数调用”，如果函数 Foo 有一些副作用（比如写日志、修改状态、注册到其他对象、给 this 添加数据属性，等等）的话，就会影响到 Bar()的“后代”，后果不堪设想。</p>
+<p>因此，要创建一个合适的关联对象，我们必须使用 Object.create(..)而不是使用具有副作用的 Foo(..)。这样做唯一的缺点就是需要创建一个新对象然后把旧对象抛弃掉，不能直接修改已有的默认对象。</p>
+<p><strong>ES6 添加了辅助函数 Object.setPrototypeOf(..)，可以用标准并且可靠的方法来修改关联。</strong></p>
+<p>对比一下两种把 Bar.prototype 关联到 Foo.prototype 的方法：</p>
+<pre><code>//ES6之前需要抛弃默认的
+Bar.prototypeBar.ptototype=Object.create(Foo.prototype);
+//ES6开始可以直接修改现有的Bar.prototype
+Object.setPrototypeOf(Bar.prototype,Foo.prototype);
+</code></pre>
+<p>如果忽略掉 Object.create(..)方法带来的轻微性能损失（抛弃的对象需要进行垃圾回收），它实际上比 ES6 及其之后的方法更短而且可读性更高。</p>
+<p><strong>检查“类关系”</strong><br>instanceof 操作符的左操作数是一个普通的对象，右操作数是一个函数。instanceof 回答的问题是：在 a 的整条[[Prototype]]链中是否有指向 Foo.prototype 的对象？<br>这个方法只能处理对象（a）和函数（带.prototype 引用的 Foo）之间的关系。如果你想判断两个对象（比如 a 和 b）之间是否通过[[Prototype]]链关联，只用 instanceof 无法实现。</p>
+<pre><code>//第二种判断[[Prototype]]反射的方法
+Foo.prototype.isPrototypeOf(a);//true
+</code></pre>
+<p>isPrototypeOf(..)回答的问题是：在 a 的整条[[Prototype]]链中是否出现过 Foo.prototype？<br>这个方法并不需要使用函数（“类”），它直接使用 b 和 c 之间的对象引用来判断它们的关系。换句话说，语言内置的 isPrototypeOf(..)函数就是我们的 isRelatedTo(..)函数。</p>
+<pre><code>//非常简单：b是否出现在c的[[Prototype]]链中？
+b.isPrototypeOf(c);
+</code></pre>
+<p>也可以直接获取一个对象的[[Prototype]]链。在 ES5 中，标准的方法是：</p>
+<pre><code>Object.getPrototypeOf(a);
+</code></pre>
+<p>可以验证一下，这个对象引用是否和我们想的一样：</p>
+<pre><code>Object.getPrototypeOf(a)===Foo.prototype;//true
+</code></pre>
+<p>绝大多数（不是所有！）浏览器也支持一种非标准的方法来访问内部[[Prototype]]属性：</p>
+<pre><code>a.**proto**===Foo.prototype;//true
+</code></pre>
+<p>.__proto__的实现大致上是这样的</p>
+<pre><code>Object.defineProperty(Object.prototype, &quot;__proto__&quot; ,&#123;
+    get: function() &#123;
+        return Object.getPrototypeOf(this);
+    &#125;,
+    set: function(o) &#123;
+        //ES6中的setPrototypeOf(..)
+        Object.setPrototypeOf(this,o);
+        return o;
+    &#125;
+&#125;);
+</code></pre>
+<p>访问（获取值）a.<strong>proto</strong>时，实际上是调用了 a.<strong>proto</strong>()（调用 getter 函数）。虽然 getter 函数存在于 Object.prototype 对象中，但是它的 this 指向对象 a（this 的绑定规则参见第 2 章），所以和 Object.getPrototypeOf(a)结果相同。<br>.__proto__是可设置属性，之前的代码中使用 ES6 的 Object.setPrototypeOf(..)进行设置。然而，通常来说你不需要修改已有对象的[[Prototype]]。</p>
+<h4 id="对象关联"><a href="#对象关联" class="headerlink" title="对象关联"></a>对象关联</h4><p>Object.create(null)会创建一个拥有空（或者说 null）[[Prototype]]链接的对象，这个对象无法进行委托。由于这个对象没有原型链，所以 instanceof 操作符（之前解释过）无法进行判断，因此总是会返回 false。这些特殊的空[[Prototype]]对象通常被称作“字典”，它们完全不会受到原型链的干扰，因此非常适合用来存储数据。</p>
+<p>Object.create(..)是在 ES5 中新增的函数,Object.create()的 polyfill 代码</p>
+<pre><code>if(!Object.create)&#123;
+    Object.create = function(o) &#123;
+        function F() &#123;&#125;
+        F.prototype = o;
+      return new F();
+    &#125;;
+&#125;
+</code></pre>
+<h4 id="小结-9"><a href="#小结-9" class="headerlink" title="小结"></a>小结</h4><p>如果要访问对象中并不存在的一个属性，[[Get]]操作就会查找对象内部[[Prototype]]关联的对象。这个关联关系实际上定义了一条“原型链”（有点像嵌套的作用域链），在查找属性时会对它进行遍历。</p>
+<p>所有普通对象都有内置的 Object.prototype，指向原型链的顶端（比如说全局作用域），如果在原型链中找不到指定的属性就会停止。toString()、valueOf()和其他一些通用的功能都存在于 Object.prototype 对象上，因此语言中所有的对象都可以使用它们。</p>
+<p>关联两个对象最常用的方法是使用 new 关键词进行函数调用，在调用的四个步骤中会创建一个关联其他对象的新对象。</p>
+<p>使用 new 调用函数时会把新对象的.prototype 属性关联到“其他对象”。带 new 的函数调用通常被称为“构造函数调用”，尽管它们实际上和传统面向类语言中的类构造函数不一样。</p>
+<p>虽然这些 JavaScript 机制和传统面向类语言中的“类初始化”和“类继承”很相似，但是 JavaScript 中的机制有一个核心区别，那就是不会进行复制，对象直接是通过内部的[[Prototype]]链关联的。</p>
+<p>出于各种原因，以“继承”结尾的术语（包括“原型继承”）和其他面向对象的术语都无法帮助你理解 JavaScript 的真实机制（不仅仅是限制我们的思维模式）。<br>相比之下，“委托”是一个更合适的术语，因为对象之间的关系不是复制而是委托。</p>
+<h3 id="第-6-章：行为委托"><a href="#第-6-章：行为委托" class="headerlink" title="第 6 章：行为委托"></a>第 6 章：行为委托</h3><h4 id="面向委托的设计"><a href="#面向委托的设计" class="headerlink" title="面向委托的设计"></a>面向委托的设计</h4><h4 id="小结-10"><a href="#小结-10" class="headerlink" title="小结"></a>小结</h4><p>在软件架构中你可以选择是否使用类和继承设计模式。大多数开发者理所当然地认为类是唯一（合适）的代码组织方式，但是本章中我们看到了另一种更少见但是更强大的设计模式：行为委托。<br>行为委托认为对象之间是兄弟关系，互相委托，而不是父类和子类的关系。JavaScript 的[[Prototype]]机制本质上就是行为委托机制。也就是说，我们可以选择在 JavaScript 中努力实现类机制，也可以拥抱更自然的[[Prototype]]委托机制。</p>
+<p>当你只用对象来设计代码时，不仅可以让语法更加简洁，而且可以让代码结构更加清晰。</p>
+<p>对象关联（对象之前互相关联）是一种编码风格，它倡导的是直接创建和关联对象，不把他们抽象成类。对象关联可以用基于[[Prototype]]的行为委托非常自然地实现。</p>
+<h3 id="ES6-中的-Class"><a href="#ES6-中的-Class" class="headerlink" title="ES6 中的 Class"></a>ES6 中的 Class</h3><h4 id="小结-11"><a href="#小结-11" class="headerlink" title="小结"></a>小结</h4><p>class 很好地伪装成 JavaScript 中类和继承设计模式的解决方案，但是它实际上起到了反作用：它隐藏了许多问题并且带来了更多更细小但是危险的问题。<br>class 加深了过去 20 年中对于 JavaScript 中“类”的误解，在某些方面，它产生的问题比解决的多，而且让本来优雅简洁的[[Prototype]]机制变得非常别扭。<br>结论：如果 ES6 的 class 让[[Prototype]]变得更加难用而且隐藏了 JavaScript 对象最重要的机制——对象之间的实时委托关联，我们难道不应该认为 class 产生的问题比解决的多吗？难道不应该抵制这种设计模式吗？</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">笔记</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/12/22/vuex%E9%9A%8F%E8%AE%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="vuex随记">
+                        
+                        <span class="card-title">vuex随记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Javascript/" class="post-category">
+                                    Javascript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                    <a href="/tags/vuex/">
+                        <span class="chip bg-color">vuex</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/12/26/gogs-hexo%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84git%E7%A7%81%E6%9C%8D%E4%B8%94%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.png" class="responsive-img" alt="gogs+hexo搭建自己的git私服且自动部署博客网站">
+                        
+                        <span class="card-title">gogs+hexo搭建自己的git私服且自动部署博客网站</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            laycoder
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Gogs/">
+                        <span class="chip bg-color">Gogs</span>
+                    </a>
+                    
+                    <a href="/tags/Hexo/">
+                        <span class="chip bg-color">Hexo</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2018-2022</span>
+            
+            <span id="year">2018</span>
+            <a href="/about" target="_blank">laycoder</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://beian.miit.gov.cn/" target="_blank">宁ICP备20000554号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/zn-nz" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:898468959@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=898468959" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 898468959" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
