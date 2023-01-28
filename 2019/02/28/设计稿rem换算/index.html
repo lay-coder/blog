@@ -414,13 +414,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>rem 是相对于根元素的字体大小的单位<br>根据设计稿参照<br>如 iPhone6 375x667</p>
-<p>屏幕宽为 100vw<br>1vw=375px/100=3.75px<br>100px/3.75=26.67;<br>26.67vw = 100px = 1rem<br>设计稿一般为 750px 则<br>html 根元素设置 font-size</p>
+                <p>rem 是相对于根元素的字体大小的单位<br>rem 是 CSS3 新增的一个相对单位（root em，根 em），这个单位引起了广泛关注。这个单位与 em 有什么区别呢？区别在于使用 rem 为元素设定字体大小时，仍然是相对大小，但相对的只是 HTML 根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。目前，除了 IE8 及更早版本外，所有浏览器均已支持 rem。对于不支持它的浏览器，应对方法也很简单，就是多写一个绝对单位的声明。这些浏览器会忽略用 rem 设定的字体大小。</p>
+<p>根据设计稿参照<br>如 iPhone6 375x667</p>
+<p>屏幕宽为 100vw<br>每像素的 vw<br>100vw / 375px（设计稿尺寸） = 0.2667vw;<br>为了方便计算取每 100px 的 vw 设置为根元素单位<br>100px = 26.67vw<br>1rem 等于一个根元素单位<br>1rem = 26.67vw = 100px =<br>设计稿一般为 750px 则<br>html 根元素设置 font-size</p>
 <pre><code>html&#123;
   font-size:13.33vw;
 &#125;
 </code></pre>
-<p>页面使用时将设计稿的像素值/100=rem 数值</p>
+<p>页面 css 使用时将设计稿的像素值/100=rem 数值</p>
 
                 
             </div>
@@ -759,7 +760,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2018-2022</span>
+                <span id="year">2018-2023</span>
             
             <span id="year">2018</span>
             <a href="/about" target="_blank">laycoder</a>

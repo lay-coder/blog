@@ -458,28 +458,112 @@
 <ol start="4">
 <li>一层的json数组排序</li>
 </ol>
-<pre><code>// Array.sort
-arr.sort((a, b) =&gt; b.key - a.key)
-
-// 快速排序
-arr：需要排序的json数组
-atrr:按元素key排序
-function quickSort(arr: any, atrr: string): any &#123;
-  if (arr.length &lt;= 1) &#123;
-    return arr
-  &#125;
-  const pivotIndex = Math.floor(arr.length / 2)
-  const pivot = arr.splice(pivotIndex, 1)[0]
-  const left: any = []
-  const right: any = []
-  for (let i = 0; i &lt; arr.length; i++) &#123;
-    if (arr[i][atrr] &lt; pivot[atrr]) &#123;
-      left.push(arr[i])
+<pre><code>// 匹配中文
+const REGCHINESENUM = /[一二三四五六七八九十]&#123;1,&#125;/;
+// 匹配汉字
+const REGCH = /^[\u4e00-\u9fa5]+$/;
+// 是否是汉字
+const isCH= str =&gt; REGCH.test(str);
+/**
+* 一层json数组排序
+* @param &#123;[&#123;&#125;]&#125; arr
+* @param &#123;string&#125; keys // 按多个key排序英文逗号,隔开
+* @param &#123;boolean&#125; big2Small // 是否从大到小排，默认false——从小到大
+* @returns
+*/
+const sortFuc = (arr, keys, big2Small = false) =&gt; &#123;
+  if (Object.prototype.toString.call(arr) !== &quot;[object Array]&quot;) return [];
+  const keyArr = keys?.split(&quot;,&quot;);
+  function computeResult(av, bv) &#123;
+    switch (true) &#123;
+    case !!av?.match(REGCHINESENUM)?.length &amp;&amp; !!bv?.match(REGCHINESENUM)?.length:
+      return chineseToNumber(av?.match(REGCHINESENUM)[0]) - chineseToNumber(bv?.match(REGCHINESENUM)[0]);
+    case isCH(av) &amp;&amp; isCH(bv):
+      return -1;
+    case isCH(av) &amp;&amp; !isCH(bv):
+      return -1;
+    case !isCH(av) &amp;&amp; isCH(bv):
+      return 1;
+    default:
+      break;
+    &#125;
+    let temp = 0;
+    if (av?.length !== bv?.length) &#123;
+      temp += av?.length - bv?.length || 0;
     &#125; else &#123;
-      right.push(arr[i])
+      temp += av?.localeCompare(bv) + ((av - bv) * 2 || 0);
+    &#125;
+    return temp;
+  &#125;
+  return arr.sort((a, b) =&gt; &#123;
+    let result = 0;
+    if (keyArr) &#123;
+      keyArr.forEach((key) =&gt; &#123;
+        try &#123;
+          const av = a[key]?.toString().trim();
+          const bv = b[key]?.toString().trim();
+          result += computeResult(av, bv);
+        &#125; catch (e) &#123;
+          console.log(e);
+        &#125;
+      &#125;);
+    &#125; else &#123;
+      const av = a?.toString().trim();
+      const bv = b?.toString().trim();
+      result += computeResult(av, bv);
+    &#125;
+    return result * (big2Small ? -1 : 1);
+  &#125;);
+&#125;;
+
+// 中文数字转换阿拉伯数字
+const chnNumChar = &#123;
+  零: 0,
+  一: 1,
+  二: 2,
+  三: 3,
+  四: 4,
+  五: 5,
+  六: 6,
+  七: 7,
+  八: 8,
+  九: 9
+&#125;;
+const chnNameValue = &#123;
+  十: &#123; value: 10, secUnit: false &#125;,
+  百: &#123; value: 100, secUnit: false &#125;,
+  千: &#123; value: 1000, secUnit: false &#125;,
+  万: &#123; value: 10000, secUnit: true &#125;,
+  亿: &#123; value: 100000000, secUnit: true &#125;
+&#125;;
+function chineseToNumber(chnStr) &#123;
+  var rtn = 0;
+  var section = 0;
+  var number = 0;
+  var secUnit = false;
+  var str = chnStr.split(&quot;&quot;);
+
+  for (var i = 0; i &lt; str.length; i++) &#123;
+    var num = chnNumChar[str[i]];
+    if (typeof num !== &quot;undefined&quot;) &#123;
+      number = num;
+      if (i === str.length - 1) &#123;
+        section += number;
+      &#125;
+    &#125; else &#123;
+      var unit = chnNameValue[str[i]].value;
+      secUnit = chnNameValue[str[i]].secUnit;
+      if (secUnit) &#123;
+        section = (section + number) * unit;
+        rtn += section;
+        section = 0;
+      &#125; else &#123;
+        section += number * unit;
+      &#125;
+      number = 0;
     &#125;
   &#125;
-  return [...quickSort(left, atrr), pivot, ...quickSort(right, atrr)]
+  return rtn + section;
 &#125;
 </code></pre>
 
@@ -824,7 +908,7 @@ function quickSort(arr: any, atrr: string): any &#123;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2018-2022</span>
+                <span id="year">2018-2023</span>
             
             <span id="year">2018</span>
             <a href="/about" target="_blank">laycoder</a>
