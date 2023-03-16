@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="你不知道的js（下卷）, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
+    <meta name="keywords" content="js引擎的执行过程（二）, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
     <meta name="description" content="laycoder.com，前端哒哒哒哒哒哒哒">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>你不知道的js（下卷） | lay coder</title>
+    <title>js引擎的执行过程（二） | lay coder</title>
     <link rel="icon" type="image/png" href="/medias/avatar.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">你不知道的js（下卷）</h1>
+                    <h1 class="description center-align post-title">js引擎的执行过程（二）</h1>
                 </div>
             </div>
         </div>
@@ -368,8 +368,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">读书笔记</span>
+                            <a href="/tags/Javascript/">
+                                <span class="chip bg-color">Javascript</span>
                             </a>
                         
                     </div>
@@ -393,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-12-08
+                    2018-12-25
                 </div>
                 
 
@@ -414,219 +414,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="第一部分：起步上路"><a href="#第一部分：起步上路" class="headerlink" title="第一部分：起步上路"></a>第一部分：起步上路</h2><h3 id="第-1-章：深入编程"><a href="#第-1-章：深入编程" class="headerlink" title="第 1 章：深入编程"></a>第 1 章：深入编程</h3><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>程序常被称为源码或代码，它是一组特定的指令，用来指示计算机要执行哪些任务。虽然对 JavaScript 来说可以直接在浏览器的开发者终端中输入代码，但代码通常会被保存在文本文件中。<br>指令的格式和组合规则被称为计算机语言，有时也被称为语法。<br>在计算机语言中，执行特定任务的一组单词、数字和运算符被称为语句。<br>程序就是多个这样语句的集合，它们合起来描述了程序要执行的所有步骤。</p>
-<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><p>语句由一个或多个表达式组成。一个表达式是对一个变量或值的引用，或者是一组值和变量与运算符的组合。</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><ul>
-<li>在值上执行动作需要运算符。</li>
-<li>执行各种类型的动作需要值和类型，比如，对数字进行数学运算，用字符串输出。</li>
-<li>在程序的执行过程中需要变量来保存数据（也就是状态）。</li>
-<li>需要 if 这样的条件判断来作出决策。</li>
-<li>需要循环来重复任务，直到不满足某个条件。</li>
-<li>需要函数将代码组织为逻辑上可复用的块。</li>
-</ul>
-<p>代码注释是编写可读代码的一种有效方法，能让你的代码更易于理解和维护，如果以后出现问题的话也更加容易进行修复。</p>
-<h3 id="第-2-章：深入-JavaScript"><a href="#第-2-章：深入-JavaScript" class="headerlink" title="第 2 章：深入 JavaScript"></a>第 2 章：深入 JavaScript</h3><h4 id="值与类型"><a href="#值与类型" class="headerlink" title="值与类型"></a>值与类型</h4><ul>
-<li>字符串</li>
-<li>数字</li>
-<li>布尔型</li>
-<li>null 和 undefined</li>
-<li>对象</li>
-<li>符号</li>
-</ul>
-<p>JavaScript 提供了一个 typeof 运算符，该运算符可以用来查看值的类型：</p>
-<pre><code>var a;
-typeof a; // undefined
+                <h2 id="js-引擎的执行过程（二）"><a href="#js-引擎的执行过程（二）" class="headerlink" title="js 引擎的执行过程（二）"></a><center>js 引擎的执行过程（二）</center></h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>js 引擎执行过程主要分为三个阶段，分别是语法分析，预编译和执行阶段，上篇文章我们介绍了语法分析和预编译阶段，那么我们先做个简单概括，如下：<br>语法分析： 分别对加载完成的代码块进行语法检验，语法正确则进入预编译阶段；不正确则停止该代码块的执行，查找下一个代码块并进行加载，加载完成再次进入该代码块的语法分析阶段<br>预编译：通过语法分析阶段后，进入预编译阶段，则创建变量对象（创建 arguments 对象（函数运行环境下），函数声明提前解析，变量声明提升），确定作用域链以及 this 指向。<br>如还有疑问回头看看上篇文章 js 引擎的执行过程（一）。</p>
+<p>本文主要分析 js 引擎执行的第三个阶段–执行阶段，在分析之前我们先思考以下两个问题：<br>js 是单线程的，为了避免代码解析阻塞使用了异步执行，那么它的异步执行机制是怎么样的？<br>通过事件循环（Event Loop），理解了事件循环的原理就理解了 js 的异步执行机制，本文主要介绍。<br>js 是单线程的，那么是否代表参与 js 执行过程的线程就只有一个？<br>不是的，会有四个线程参与该过程，但是永远只有 JS 引擎线程在执行 JS 脚本程序，其他的三个线程只协助，不参与代码解析与执行。参与 js 执行过程的线程分别是：<br>JS 引擎线程： 也称为 JS 内核，负责解析执行 Javascript 脚本程序的主线程（例如 V8 引擎）<br>事件触发线程： 归属于浏览器内核进程，不受 JS 引擎线程控制。主要用于控制事件（例如鼠标，键盘等事件），当该事件被触发时候，事件触发线程就会把该事件的处理函数推进事件队列，等待 JS 引擎线程执行<br>定时器触发线程：主要控制计时器 setInterval 和延时器 setTimeout，用于定时器的计时，计时完毕，满足定时器的触发条件，则将定时器的处理函数推进事件队列中，等待 JS 引擎线程执行。<br>注：W3C 在 HTML 标准中规定 setTimeout 低于 4ms 的时间间隔算为 4ms。<br>HTTP 异步请求线程：通过 XMLHttpRequest 连接后，通过浏览器新开的一个线程，监控 readyState 状态变更时，如果设置了该状态的回调函数，则将该状态的处理函数推进事件队列中，等待 JS 引擎线程执行。<br>注：浏览器对通一域名请求的并发连接数是有限制的，Chrome 和 Firefox 限制数为 6 个，ie8 则为 10 个。<br>总结：永远只有 JS 引擎线程在执行 JS 脚本程序，其他三个线程只负责将满足触发条件的处理函数推进事件队列，等待 JS 引擎线程执行。<br>执行阶段<br>我们先分析一个典型的例子（来自 Tasks, microtasks, queues and schedules，建议英文基础好的阅读，非常不错的文章）：<br>console.log(‘script start’);setTimeout(function() { console.log(‘setTimeout’);}, 0);Promise.resolve().then(function() { console.log(‘promise1’);}).then(function() { console.log(‘promise2’);});console.log(‘script end’);<br>这里我直接划分例子的代码结构，简单描述分析执行过程，暂不解释该过程中的概念和原理，概念和原理将会在下面具体讲解如下：<br>宏任务（macro-task），宏任务又按执行顺序分为同步任务和异步任务<br>同步任务<br>console.log(‘script start’);console.log(‘script end’);<br>异步任务<br>setTimeout(function() { console.log(‘setTimeout’);}, 0);<br>微任务（micro-task）<br>Promise.resolve().then(function() { console.log(‘promise1’);}).then(function() { console.log(‘promise2’);});<br>在 JS 引擎执行过程中，进入执行阶段后，代码的执行顺序如下：<br>宏任务(同步任务) –&gt; 微任务 –&gt; 宏任务(异步任务)<br>输出结果为：<br>script startscript endpromise1promise2setTimeout<br>进入 ES6 或 Node 环境中，JS 的任务分为两种，分别是宏任务（macro-task）和微任务（micro-task），在最新的 ECMAScript 中，微任务称为 jobs，宏任务称为 task，他们的执行顺序如上。可能很多人对上面的分析并不理解，那么我们接下来继续对上面例子进行详细分析。<br>宏任务<br>宏任务（macro-task）可分为同步任务和异步任务：<br>同步任务指的是在 JS 引擎主线程上按顺序执行的任务，只有前一个任务执行完毕后，才能执行后一个任务，形成一个执行栈（函数调用栈）。<br>异步任务指的是不直接进入 JS 引擎主线程，而是满足触发条件时，相关的线程将该异步任务推进任务队列(task queue)，等待 JS 引擎主线程上的任务执行完毕，空闲时读取执行的任务，例如异步 Ajax，DOM 事件，setTimeout 等。<br>理解宏任务中同步任务和异步任务的执行顺序，那么就相当于理解了 JS 异步执行机制–事件循环（Event Loop）。<br>事件循环<br>事件循环可以理解成由三部分组成，分别是：<br>主线程执行栈<br>异步任务等待触发<br>任务队列<br>任务队列(task queue)就是以队列的数据结构对事件任务进行管理，特点是先进先出，后进后出。</p>
+<p>这里直接引用一张著名的图片(参考自 Philip Roberts 的演讲《Help, I’m stuck in an event-loop》)，帮助我们理解，如下：</p>
+<p>在 JS 引擎主线程执行过程中：<br>首先执行宏任务的同步任务，在主线程上形成一个执行栈，可理解为函数调用栈；<br>当执行栈中的函数调用到一些异步执行的 API（例如异步 Ajax，DOM 事件，setTimeout 等 API），则会开启对应的线程（Http 异步请求线程，事件触发线程和定时器触发线程）进行监控和控制<br>当异步任务的事件满足触发条件时，对应的线程则会把该事件的处理函数推进任务队列(task queue)中，等待主线程读取执行<br>当 JS 引擎主线程上的任务执行完毕，则会读取任务队列中的事件，将任务队列中的事件任务推进主线程中，按任务队列顺序执行<br>当 JS 引擎主线程上的任务执行完毕后，则会再次读取任务队列中的事件任务，如此循环，这就是事件循环（Event Loop）的过程<br>如果还是不能理解，那么我们再次拿上面的例子进行详细分析，该例子中宏任务的代码部分是：<br>console.log(‘script start’);setTimeout(function() { console.log(‘setTimeout’);}, 0);console.log(‘script end’);<br>代码执行过程如下：<br>JS 引擎主线程按代码顺序执行，当执行到 console.log(‘script start’);，JS 引擎主线程认为该任务是同步任务，所以立刻执行输出 script start，然后继续向下执行；<br>JS 引擎主线程执行到 setTimeout(function() { console.log(‘setTimeout’); }, 0);，JS 引擎主线程认为 setTimeout 是异步任务 API，则向浏览器内核进程申请开启定时器线程进行计时和控制该 setTimeout 任务。由于 W3C 在 HTML 标准中规定 setTimeout 低于 4ms 的时间间隔算为 4ms，那么当计时到 4ms 时，定时器线程就把该回调处理函数推进任务队列中等待主线程执行，然后 JS 引擎主线程继续向下执行<br>JS 引擎主线程执行到 console.log(‘script end’);，JS 引擎主线程认为该任务是同步任务，所以立刻执行输出 script end<br>JS 引擎主线程上的任务执行完毕（输出 script start 和 script end）后，主线程空闲，则开始读取任务队列中的事件任务，将该任务队里的事件任务推进主线程中，按任务队列顺序执行，最终输出 setTimeout，所以输出的结果顺序为 script start script end setTimeout<br>以上便是 JS 引擎执行宏任务的整个过程。<br>理解该过程后，我们做一些拓展性的思考：<br>我们都知道 setTimeout 和 setInterval 是异步任务的定时器，需要添加到任务队列等待主线程执行，那么使用 setTimeout 模拟实现 setInterval，会有区别吗？<br>答案是有区别的，我们不妨思考一下：<br>setTimeout 实现 setInterval 只能通过递归调用<br>setTimeout 是在到了指定时间的时候就把事件推到任务队列中，只有当在任务队列中的 setTimeout 事件被主线程执行后，才会继续再次在到了指定时间的时候把事件推到任务队列，那么 setTimeout 的事件执行肯定比指定的时间要久，具体相差多少跟代码执行时间有关<br>setInterval 则是每次都精确的隔一段时间就向任务队列推入一个事件，无论上一个 setInterval 事件是否已经执行，所以有可能存在 setInterval 的事件任务累积，导致 setInterval 的代码重复连续执行多次，影响页面性能。<br>综合以上的分析，使用 setTimeout 实现计时功能是比 setInterval 性能更好的。当然如果不需要兼容低版本的 IE 浏览器，使用 requestAnimationFrame 是更好的选择。<br>我们继续再做进一步的思考，如下：<br>高频率触发的事件（例如滚动事件）触发频率过高会影响页面性能，甚至造成页面卡顿，我们是否可以利用计时器的原理进行优化呢？<br>是可以的，我们可以利用 setTimeout 实现计时器的原理，对高频触发的事件进行优化，实现点在于将多个触发事件合并成一个，这就是防抖和节流，本文先不做具体讲解，大家可以自行研究，有机会我再另开文章分析。<br>微任务<br>微任务是在 es6 和 node 环境中出现的一个任务类型，如果不考虑 es6 和 node 环境的话，我们只需要理解宏任务事件循环的执行过程就已经足够了，但是到了 es6 和 node 环境，我们就需要理解微任务的执行顺序了。<br>微任务（micro-task）的 API 主要有:Promise， process.nextTick<br>这里我们直接引用一张流程图帮助我们理解，如下：</p>
+<p>在宏任务中执行的任务有两种，分别是同步任务和异步任务，因为异步任务会在满足触发条件时才会推进任务队列（task queue），然后等待主线程上的任务执行完毕，再读取任务队列中的任务事件，最后推进主线程执行，所以这里将异步任务即任务队列看作是新的宏任务。执行的过程如上图所示：<br>执行宏任务中同步任务，执行结束；<br>检查是否存在可执行的微任务，有的话执行所有微任务，然后读取任务队列的任务事件，推进主线程形成新的宏任务；没有的话则读取任务队列的任务事件，推进主线程形成新的宏任务<br>执行新宏任务的事件任务，再检查是否存在可执行的微任务，如此不断的重复循环<br>这就是加入微任务后的详细事件循环，如果还没有理解，那么们对一开始的例子做一个全面的分析，如下：<br>console.log(‘script start’);setTimeout(function() { console.log(‘setTimeout’);}, 0);Promise.resolve().then(function() { console.log(‘promise1’);}).then(function() { console.log(‘promise2’);});console.log(‘script end’);<br>执行过程如下：<br>代码块通过语法分析和预编译后，进入执行阶段，当 JS 引擎主线程执行到 console.log(‘script start’);，JS 引擎主线程认为该任务是同步任务，所以立刻执行输出 script start，然后继续向下执行；<br>JS 引擎主线程执行到 setTimeout(function() { console.log(‘setTimeout’); }, 0);，JS 引擎主线程认为 setTimeout 是异步任务 API，则向浏览器内核进程申请开启定时器线程进行计时和控制该 setTimeout 任务。由于 W3C 在 HTML 标准中规定 setTimeout 低于 4ms 的时间间隔算为 4ms，那么当计时到 4ms 时，定时器线程就把该回调处理函数推进任务队列中等待主线程执行，然后 JS 引擎主线程继续向下执行<br>JS 引擎主线程执行到 Promise.resolve().then(function() { console.log(‘promise1’); }).then(function() { console.log(‘promise2’); });，JS 引擎主线程认为 Promise 是一个微任务，这把该任务划分为微任务，等待执行<br>JS 引擎主线程执行到 console.log(‘script end’);，JS 引擎主线程认为该任务是同步任务，所以立刻执行输出 script end<br>主线程上的宏任务执行完毕，则开始检测是否存在可执行的微任务，检测到一个 Promise 微任务，那么立刻执行，输出 promise1 和 promise2<br>微任务执行完毕，主线程开始读取任务队列中的事件任务 setTimeout，推入主线程形成新宏任务，然后在主线程中执行，输出 setTimeout<br>最后的输出结果即为：<br>script startscript endpromise1promise2setTimeout<br>总结<br>以上便是 JS 引擎执行的全部过程，JS 引擎的执行过程其实并不复杂，只要多思考多研究就可以理解，理解该过程后可以在一定程度上提高对 JS 的认识。</p>
 
-a=&quot;hello world&quot;;
-typeof a; // string
-
-a=42;
-typeof a; // boolean
-
-a=null;
-typeof a; // object
-
-a=undefined;
-typeof a; // undefined;
-
-a=&#123;b:&quot;c&quot;&#125;;
-typeof a; // object
-</code></pre>
-<p>typeof 运算符的返回值永远是这 6 个（对 ES6 来说是 7 个）字符串值之一。也就是说，typeof “abc” 返回 “string”,而不是 string。</p>
-<p>1、对象<br>对象类型是指一个组合值，你可以为其设置属性（命名的位置），每个属性可以持有属于自己的任意类型的值。</p>
-<ol>
-<li>数组<br>数组是一个持有（任意类型）值的对象，这些值不是通过命名属性/键值索引，而是通过数字索引位置</li>
-<li>函数<br>函数也同样是对象的一个子类型，因为 typeof 返回”function”，这意味着 function 是一个主类型，因此，function 可以拥有属性，但通常只在很少的情况下才会使用函数的对象属性</li>
-</ol>
-<p>2、内置类型方法<br>字符串值可以封装未 String 对象，数字可以封装为 Number 对象，布尔型值可以封装为 Boolean 对象。在多数情况下，不需要思考直接使用这样的值的对象封装形式，所有情况下都使用原生值形式，让 JavaScript 负责其余的事情。</p>
-<p>3、值的比较</p>
-<ol>
-<li>类型转换</li>
-<li>真与假</li>
-<li>相等<br>相等运算符有四种：==、===、!=和!==。!形式显然是相应的“不等”版本；不要混淆了不等关系和不相等。<br>==和===的区别在于，==检查的是允许类型转换情况下的值的相等性，而===检查不允许类型转换情况下的值的相等性；因此，===经常被称为“严格相等”。<br>==的粗略相等比较允许隐式的类型转换，而严格相等比较===则不允许：</li>
-<li>不等关系<br>运算符&lt;,&gt;、&lt;=和&gt;=用于表示不等关系。</li>
-</ol>
-<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>在 JavaScript 中，变量的名称（包括函数名称）必须是有效的标识符。考虑到 Unicode 这样的非传统字符的情况，标识符中有效字符的严格完整规则有点复杂。如果只是考虑常用的 ASCII 字母数字的话，那么规则是非常简单的。<br>标识符必须有 a<del>z、A</del>Z、$或_开始。它可以包含前面所有这些字符以及数字 0-9。</p>
-<h5 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h5><p>如果使用关键字 var 声明一个变量，那么这个变量就属于当前的函数作用域，如果声明是发生在任何函数外的顶层声明，那么这个变量则属于全局作用域。</p>
-<ol>
-<li>提升</li>
-</ol>
-<p>无论 var 出现在一个作用域中的哪个位置，这个声明都属于整个作用域，在其中到处都是可以访问的。</p>
-<p>这一行为被比喻地称为提升，var 声明概念上“移动”到了其所在作用域的最前面</p>
-<ol start="2">
-<li>嵌套作用域<br>声明后的变量在这个作用域内是随处可以访问的，包括所有低层/内层的作用域。</li>
-</ol>
-<p>除了在函数层级声明变量，ES6 还支持通过 let 关键字声明属于单独快（{…}对）的变量。块作用域非常有助于更细化地管理变量作用域，从而更容易随着时间的发展而维护代码。</p>
-<h4 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h4><h4 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h4><h4 id="作为值的函数"><a href="#作为值的函数" class="headerlink" title="作为值的函数"></a>作为值的函数</h4><p>1、立即调用函数表达式</p>
-<pre><code>  (function IIFE()&#123;
-     console.log(&#39;Hi);
-  &#125;)();
-</code></pre>
-<p>(function IIFE(){…})函数表达式外面的(…)就是 JavaScript 语法能够防止其成为普通函数声明的部分。<br>表达式最后的()实际上就表示立即执行前面给出的函数表达式。</p>
-<p>2、闭包<br>闭包是 JavaScript 中一个非常重要，且经常被误解的概念。</p>
-<h4 id="this-标识符"><a href="#this-标识符" class="headerlink" title="this 标识符"></a>this 标识符</h4><p>如果一个函数内部有一个 this 引用，那么这个 this 通常指向一个对象。但它指向的是哪个对象要根据这个函数是如何被调用来决定。</p>
-<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p>当引用对象的某个属性时，如果这个属性并不存在，那么 JavaScript 会自动使用对象的内部原型引用找到另外一个对象来寻找这个属性。</p>
-<p>从一个对象到其后备对象的内部原型引用的链接是在创建对象时发生的。展示这一点的最简单的方法就是使用内置工具 Object.create(…)。</p>
-<h4 id="旧与新"><a href="#旧与新" class="headerlink" title="旧与新"></a>旧与新</h4><p>1、polyfilling<br>用于表示根据新特性的定义，创建一段与之行为等价但能够在旧的 JavaScript 环境中运行的代码。<br>2、transpiling<br>通过工具将新版代码转换为等价的旧版代码。这个过程通常被称为“transpiling”。它是由 transforming（转换）和 compiling（编译）组合而成的术语。</p>
-<h4 id="非-JavaScript"><a href="#非-JavaScript" class="headerlink" title="非 JavaScript"></a>非 JavaScript</h4><h5 id="DOM-API"><a href="#DOM-API" class="headerlink" title="DOM API"></a>DOM API</h5><p>当代码在浏览器中运行时，变量 document 作为一个全局变量存在。它既不是由 JavaScript 引擎提供的，也不由 JavaScript 标准控制。它是一个特殊的对象，通常被称为“宿主对象”。</p>
-<h5 id="输入-输出（I-O）。"><a href="#输入-输出（I-O）。" class="headerlink" title="输入/输出（I/O）。"></a>输入/输出（I/O）。</h5><p>浏览器提供了 alert(…)、console.log(…)…等。</p>
-<h3 id="第-3-章：深入“你不知道的-JavaScript”系列"><a href="#第-3-章：深入“你不知道的-JavaScript”系列" class="headerlink" title="第 3 章：深入“你不知道的 JavaScript”系列"></a>第 3 章：深入“你不知道的 JavaScript”系列</h3><h4 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h4><h4 id="this-和对象原型"><a href="#this-和对象原型" class="headerlink" title="this 和对象原型"></a>this 和对象原型</h4><h4 id="类型和语法"><a href="#类型和语法" class="headerlink" title="类型和语法"></a>类型和语法</h4><h4 id="异步和性能"><a href="#异步和性能" class="headerlink" title="异步和性能"></a>异步和性能</h4><h4 id="ES6-及更新版本"><a href="#ES6-及更新版本" class="headerlink" title="ES6 及更新版本"></a>ES6 及更新版本</h4><h2 id="第二部分：ES6-及更新版本"><a href="#第二部分：ES6-及更新版本" class="headerlink" title="第二部分：ES6 及更新版本"></a>第二部分：ES6 及更新版本</h2><h3 id="第-1-章：ES？现在与未来"><a href="#第-1-章：ES？现在与未来" class="headerlink" title="第 1 章：ES？现在与未来"></a>第 1 章：ES？现在与未来</h3><h3 id="第-2-章：语法"><a href="#第-2-章：语法" class="headerlink" title="第 2 章：语法"></a>第 2 章：语法</h3><p>1、块作用域声明</p>
-<ol>
-<li>let 声明</li>
-<li>const 声明</li>
-<li>块作用域函数</li>
-</ol>
-<p>2、spread/rest<br>ES6 引入了一个新的运算符…，通常称为 spread 或 rest（展开或收集）运算符，取决于它在哪/如何使用</p>
-<p>3、默认参数值<br>函数默认值可以不只是简单值；它们可以是任意合法表达式，甚至是函数调用。</p>
-<p>4、解构<br>ES6 为解构新增了一个专门语法，专用于数组解构和对象解构。</p>
-<ol>
-<li>对象属性赋值模式</li>
-<li>不只是声明<br>如果省略了 var/let/const 声明符，就必须把整个赋值表达式用()括起来。如果不这样做，语句左侧{…}作为语句中的第一个元素就会被当做是一个块语句而不是一个对象。</li>
-</ol>
-<p>举例来说：</p>
-<pre><code>  [a,b,c]=[1,2,3]
-  (&#123;x,y,z&#125;)=&#123;x:4,y:5,z:6&#125;
-</code></pre>
-<p>实际上，赋值表达式并不必须是变量标识符。任何合法的赋值表达式都可以。<br>举例来说：</p>
-<pre><code>  var o = &#123;&#125;;
-  [o.a, o.b, o.c]= [1, 2, 3]
-  (&#123;o.x,o.y,o.z&#125;)=&#123;x:4,y:5,z:6&#125;
-</code></pre>
-<ol start="3">
-<li>重复赋值</li>
-</ol>
-<p>5、</p>
-<ol>
-<li>默认值赋值</li>
-</ol>
-<p>例：</p>
-<pre><code>  var [a=3,b=6]=[1,2]
-  var &#123;x=5,y=6&#125;=&#123;x:1,y:2&#125;
-</code></pre>
-<p>可以组合使用默认值赋值和赋值表达式语法</p>
-<pre><code>  var &#123;x, y, z: ZZ = 20&#125; = &#123;x:1, y:2 &#125;
-  console.log(x, y, WW) // 1 2 20
-</code></pre>
-<ol start="2">
-<li>嵌套解构<br>如果解构的值中有嵌套的对象或者数组，也可以解构这些嵌套的值</li>
-</ol>
-<p>例：</p>
-<pre><code>  var a1 = [1, [2, 3, 4], 5]
-  var 01 = &#123; x: &#123; y : &#123; z: 6&#125; &#125; &#125;
-
-  var [a, [b, c, d], e ]=a1;
-  var &#123; x: &#123;y : &#123; z: w&#125;&#125;&#125;=o1;
-
-  console.log( a, b, c, d, e);  // 1 2 3 4 5
-  console.log( w )              // 6
-</code></pre>
-<ol start="3">
-<li>解构参数</li>
-</ol>
-<h4 id="对象字面量扩展"><a href="#对象字面量扩展" class="headerlink" title="对象字面量扩展"></a>对象字面量扩展</h4><p>1、简洁属性<br>2、简洁方法<br>3、计算属性名<br>4、设定[[Protottype]]<br>要为已经存在的对象设定[[Prototype]]，可以使用 ES6 工具 Object.setPrototypeOf(obja,objb)<br>5、super 对象</p>
-<h4 id="模板字面量"><a href="#模板字面量" class="headerlink" title="模板字面量"></a>模板字面量</h4><pre><code>  `$&#123;...&#125;`
-</code></pre>
-<ol>
-<li><p>插入表达式<br> ${…}内可以出现任何合法的表达式，包括函数调用、在线函数表达式调用，甚至其他插入字符串字面量。</p>
-</li>
-<li><p>标签模板字面量</p>
-<p> 例：</p>
-<pre><code>   function foo(strings,...vakues)&#123;
-      console.log(strubgs);
-      console.log(values);
-   &#125;
-   var desc = &quot;awesome&quot;;
-   foo`Everything is $&#123;desc&#125;!`;
-   // [&quot;Everything is &quot;, &quot;!&quot;];
-   // [&quot;awesome&quot;];
-</code></pre>
-</li>
-</ol>
-<p>本质上说，这是一类不需要(…)的特殊函数调用。但是传入为了字符串字面量作为标签被调用的 foo(..)函数的是什么？<br>第一个参数，名为 strings，是一个由所有普通字符串组成的数组。<br>收集到 values 数组的参数是已经求值的在字符串字面值中插入表达式的结果。</p>
-<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><h4 id="for…of-循环"><a href="#for…of-循环" class="headerlink" title="for…of 循环"></a>for…of 循环</h4><p>for…of 循环，在迭代器产生的一系列值上循环。在低层，for…of 循环向 iterable 请求一个迭代器（通过内建的 Symbol.iterator），然后反复调用这个迭代器把它产生的值赋给循环迭代变量。<br>JavaScript 中默认为（或提供）iterable 的标准内建值包括：</p>
-<ul>
-<li>Arrays</li>
-<li>Strings</li>
-<li>Generators</li>
-<li>Collections/TypedArrays</li>
-</ul>
-<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4><h4 id="数字字面量扩展"><a href="#数字字面量扩展" class="headerlink" title="数字字面量扩展"></a>数字字面量扩展</h4><h4 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h4><p>Unicode 字符范围从 0x0000 到 0xFFFF，包含可能看到和接触到的所有（各种语言的）标准打印字符。这组字符称为基本多语言平面。</p>
-<h3 id="第-3-章：代码组织"><a href="#第-3-章：代码组织" class="headerlink" title="第 3 章：代码组织"></a>第 3 章：代码组织</h3><h3 id="第-4-章：异步流控制"><a href="#第-4-章：异步流控制" class="headerlink" title="第 4 章：异步流控制"></a>第 4 章：异步流控制</h3><h3 id="第-5-章：集合"><a href="#第-5-章：集合" class="headerlink" title="第 5 章：集合"></a>第 5 章：集合</h3><h3 id="第-6-章：新增-API"><a href="#第-6-章：新增-API" class="headerlink" title="第 6 章：新增 API"></a>第 6 章：新增 API</h3><h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><p>1、静态函数 Array.of(…)<br>2、静态函数 Array.from(…)<br>3、创建数组和子类型<br>4、原型方法 copyWithin(…)<br>5、原型方法 fill(…)<br>6、原型方法 find(…)<br>7、原型方法 findIndex(…)<br>8、原型方法 entries()、values()、keys()</p>
-<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>1、静态函数 Object.is(…)<br>2、静态函数 Object.getOwnPropertySymbols(…)<br>3、静态函数 Object.setPrototypeOf(…)<br>4、静态函数 Object.assign(…)</p>
-<h4 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h4><p>1、三角函数</p>
-<ol>
-<li>cosh(…) 双曲余弦函数</li>
-<li>acosh(…) 双曲反余弦函数</li>
-<li>sinh(…) 双曲正弦函数</li>
-<li>asinh(…) 双曲反正弦函数</li>
-<li>tanh(…) 双曲正切函数</li>
-<li>atanh(…) 双曲反正切函数</li>
-<li>hypot(…) 平方和的平方根（广义勾股定理）</li>
-</ol>
-<p>2、算数</p>
-<ol>
-<li>cbrt(…) 立方根</li>
-<li>clz32(…) 计算 32 位二进制表示的前导 0 个数</li>
-<li>expm1(…) 等价于 exp(x) - 1</li>
-<li>log2(…) 二进制对数（以 2 为底的对数）</li>
-<li>log10(…) 以 10 为底的对数</li>
-<li>log1p(…) 等价于 log(x + 1)</li>
-<li>imul(…) 两个数字的 32 位整数乘法</li>
-</ol>
-<p>3、元工具</p>
-<ol>
-<li>sign(…) 返回数字符号</li>
-<li>trunc(…) 返回数字的整数部分</li>
-<li>fround(…) 向最接近的 32 位（单精度）浮点值取整</li>
-</ol>
-<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>1、静态属性</p>
-<ol>
-<li>Number.EPSILON 任意两个值之间的最小差：2^ - 52</li>
-<li>Number.MAX_SAFE_INTEGER JavaScript 可以用数字值无歧义“安全”表达的最大整数：2^53 - 1</li>
-<li>Number.MIN_SAFE_INTEGER JavaScript 可以用数字值无歧义“安全”表达的最小整数：-(2^53 - 1) 或 (-2)^53 + 1</li>
-</ol>
-<p>2、静态函数 Number.isNaN(…)<br>3、静态函数 Number.isFinite(…)<br>标准的全局 isFinite(…)会对参数进行强制类型转换，但是 Number.isFinite(…)会略去这种强制行为<br>4、整型相关静态函数</p>
-<ol>
-<li>Number.isInteger(…)</li>
-<li>Number.isSafeInteger(…)</li>
-</ol>
-<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>1、Unicode 函数<br>2、静态函数 String.raw(…)<br>3、原型函数 repeat(…)<br>4、字符串检查函数</p>
-<ol>
-<li>startsWith(…)</li>
-<li>endsWith(…)</li>
-<li>includes(…)</li>
-</ol>
-<h4 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h4><ul>
-<li>Array 新增了静态函数 of(…)和 from(…)，以及像 copyWithin(…)和 fill(…)这样的原型函数。</li>
-<li>Object 新增了静态函数 is(…)和 assign(…)。</li>
-<li>Math 新增了静态函数 acosh(…)和 clz32(…)。</li>
-<li>Number 新增了静态属性 Number.EPSILON，以及静态函数 Number.isFinite(…)。</li>
-<li>String 新增了静态函数 String.fromCodePoint(…)和 String.raw(…)，以及原型函数 repeat(…)和 includes(…)。</li>
-</ul>
-<h3 id="第-7-章：元编程"><a href="#第-7-章：元编程" class="headerlink" title="第 7 章：元编程"></a>第 7 章：元编程</h3><h4 id="函数名称"><a href="#函数名称" class="headerlink" title="函数名称"></a>函数名称</h4><h4 id="元属性"><a href="#元属性" class="headerlink" title="元属性"></a>元属性</h4><h4 id="公开符号"><a href="#公开符号" class="headerlink" title="公开符号"></a>公开符号</h4><p>1、Symbol.iterator<br>2、Symbol.toStringTag 与 Symbol.hasInstance<br>3、Symbol.species<br>4、Symbol.toPrimitive<br>5、正则表达式符号<br>6、Symbol.isConcatSpreadable<br>7、Symbol.unscopables</p>
-<h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>get(…)<br>set(…)<br>deleteProperty(…)<br>apply(…)<br>construct(…)<br>getOwnPropertyDescriptor(…)<br>defineProperty(…)<br>getPrototypeOf(…)<br>setPrototypeOf(…)<br>preventExtensions(…)<br>isExtensible(…)<br>ownKeys(…)<br>enumerate(…)<br>has(…)<br>1、代理局限性<br>2、可取消代理<br>3、使用代理</p>
-<h4 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h4><p>元编程是指把程序的逻辑转向关注自身（或自身的运行时环境），要么是为了查看自己的解构，要么是为了修改它。元编程的主要价值是扩展语言的一般机制来提供额外的新功能。<br>在 ES6 之前，JavaScript 已经有了不少的元编程功能，而 ES6 提供了几个新特性，显著提高了元编程能力。<br>从匿名函数的函数名推导，到提供了构造器调用方式这样的信息的元属性，你可以比过去更深入地查看程序运行时的结构。通过公开符号可以覆盖原本特性，比如对象到原生类型的类型转换。代理可以拦截并自定义对象的各种底层操作，Reflect 提供了工具来模拟它们。<br>特性测试，甚至可以测试像尾递归优化这样微妙的语义特性，把元编程的焦点从你的程序转移到 JavaScript 引擎功能本身。通过更多地了解环境能力，你的程序可以在运行时调整自己达到最优效果。</p>
-<h3 id="第-8-章：ES6-之后"><a href="#第-8-章：ES6-之后" class="headerlink" title="第 8 章：ES6 之后"></a>第 8 章：ES6 之后</h3>
                 
             </div>
             <hr/>
@@ -640,8 +433,8 @@ typeof a; // object
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">读书笔记</span>
+                                <a href="/tags/Javascript/">
+                                    <span class="chip bg-color">Javascript</span>
                                 </a>
                             
                         </div>
@@ -686,13 +479,13 @@ typeof a; // object
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/10/08/json%E6%B7%B1%E5%B1%82%E5%90%88%E5%B9%B6/">
+                <a href="/2018/12/28/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BF%A1%E6%81%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="json深层合并">
+                        <img src="/medias/featureimages/11.png" class="responsive-img" alt="浏览器信息">
                         
-                        <span class="card-title">json深层合并</span>
+                        <span class="card-title">浏览器信息</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -703,8 +496,57 @@ typeof a; // object
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-08
+                            <i class="far fa-clock fa-fw icon-date"></i>2018-12-28
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Javascript/" class="post-category">
+                                    Javascript
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/">
+                        <span class="chip bg-color">浏览器</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/12/20/js%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.png" class="responsive-img" alt="js引擎的执行过程（一）">
+                        
+                        <span class="card-title">js引擎的执行过程（一）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -722,55 +564,6 @@ typeof a; // object
                     
                     <a href="/tags/Javascript/">
                         <span class="chip bg-color">Javascript</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/09/06/%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84js%EF%BC%88%E4%B8%AD%E5%8D%B7%EF%BC%89/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="你不知道的js（中卷）">
-                        
-                        <span class="card-title">你不知道的js（中卷）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-06
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Javascript/" class="post-category">
-                                    Javascript
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>

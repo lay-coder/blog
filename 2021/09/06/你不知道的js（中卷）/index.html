@@ -368,8 +368,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">笔记</span>
+                            <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">读书笔记</span>
                             </a>
                         
                     </div>
@@ -863,7 +863,45 @@
                                             // 200 10 3
 </code></pre>
 <p>执行流程<br>(1) *foo() 的两个实例同时启动，两个 next() 分别从 yield 2 语句得到值 2。<br>(2) val2 * 10 也就是 2 * 10，发送到第一个生成器实例 it1，因此 x 得到值 20。z 从 1 增<br>加到 2，然后 20 * 2 通过 yield 发出，将 val1 设置为 40。<br>(3) val1 * 5 也就是 40 * 5，发送到第二个生成器实例 it2，因此 x 得到值 200。z 再次从 2<br>递增到 3，然后 200 * 3 通过 yield 发出，将 val2 设置为 600。<br>(4) val2 / 2 也就是 600 / 2，发送到第一个生成器实例 it1，因此 y 得到值 300，然后打印<br>出 x y z 的值分别是 20 300 3。<br>(5) val1 / 4 也就是 40 / 4，发送到第二个生成器实例 it2，因此 y 得到值 10，然后打印出<br>x y z 的值分别为 200 10 3。</p>
-<h3 id="第-5-章：程序性能"><a href="#第-5-章：程序性能" class="headerlink" title="第 5 章：程序性能"></a>第 5 章：程序性能</h3><h3 id="第-6-章：性能测试与调优"><a href="#第-6-章：性能测试与调优" class="headerlink" title="第 6 章：性能测试与调优"></a>第 6 章：性能测试与调优</h3>
+<h4 id="生成器产生值"><a href="#生成器产生值" class="headerlink" title="生成器产生值"></a>生成器产生值</h4><p>1、生产者与迭代器<br>2、iterable<br>3、生成器迭代器</p>
+<h4 id="异步迭代生成器"><a href="#异步迭代生成器" class="headerlink" title="异步迭代生成器"></a>异步迭代生成器</h4><h4 id="小结-7"><a href="#小结-7" class="headerlink" title="小结"></a>小结</h4><p>生成器是 ES6 的一个新的函数类型，它并不像普通函数那样总是运行到结束。取而代之的是，生成器可以在运行当中（完全保持其状态）暂停，并且将来再从暂停的地方恢复运行。<br>这种交替的暂停和恢复是合作性的而不是抢占式的，这意味着生成器具有独一无二的能力来暂停自身，这是通过关键字 yield 实现的。不过，只有控制生成器的迭代器具有恢复生成器的能力（通过 next(…)）。<br>yield/next(…)这一对不只是一种控制机制，实际上也是一种双向消息传递机制。yield..表达式本质上是暂停下来等待某个值，接下来 next(…)调用会向被暂停的 yield 表达式传回一个值（或者是隐式的 undefined）。<br>在异步控制流程方面，生成器的关键优点是：生成器内部的代码是以自然的同步/顺序方式表达任务的一系列步骤。其技巧在于，我们把可能的异步隐藏在了关键字 yield 的后面，把异步移动到控制生成器的迭代器的代码部分。<br>换句话说，生成器为异步代码保持了顺序、同步、阻塞的代码模式，这使得大脑可以更自然地追踪代码，解决了基于回调的异步的两个关键缺陷之一。</p>
+<h3 id="第-5-章：程序性能"><a href="#第-5-章：程序性能" class="headerlink" title="第 5 章：程序性能"></a>第 5 章：程序性能</h3><h4 id="Web-Workeer"><a href="#Web-Workeer" class="headerlink" title="Web Workeer"></a>Web Workeer</h4><p>从 JavaScript 主程序（或另一个 Worker）中，可以这样实例化一个 Worker：</p>
+<pre><code>    var w1=new Worker(&quot;http://some.url.1/mycoolworker.js&quot;);
+</code></pre>
+<p>这个 URL 应该指向一个 JavaScript 文件的文职（而不是一个 HTML 页面），这个文件将被加载到一个 Worker 中。然后浏览器启动一个独立的线程，让这个文件在这个线程中作为独立的程序运行。</p>
+<p>Worker 之间以及他们和主程序之间，不会共享任务任何作用域或资源，那会把所有多线程编程的噩梦带到前端领域，而是通过一个基本的事件消息机制相互联系。<br>Worker w1 对象是一个事件侦听者和触发者，可以通过订阅它来获得这个 Worker 发出的事件以及发送事件给这个 Worker。<br>通常由主页面应用程序创建 Worker，但若是需要的话，Worker 也可以实例化它自己的子 Worker，成为 subworkder。有时候，把这样的细节委托给一个“主”Worker，由它来创建其他 Worker 处理部分任务，这样很有用。</p>
+<p>1、Worker 环境<br>在 Worker 内部是无法访问主程序的任何资源的。这意味着不能访问它的任何全局变量，也不能访问页面的 DOM 或者其他资源。这是一个完全独立的线程。<br>但是可以执行网络操作（Ajax、WebSockets）以及设定定时器。还有，Worker 可以访问几个重要的全局变量和功能的本地复本，包括 navigator、location、JSON 和 applicationCache。</p>
+<p>还可以通过 importScripts(..)向 Worker 加载额外的 JavaScript 脚本。这些脚本加载是同步的。会阻塞余下 Worker 的执行，直到文件加载和执行完成。<br>Web Worker 通常应用于：</p>
+<ul>
+<li>处理密集型数学计算</li>
+<li>大数据集排序</li>
+<li>数据处理（压缩、音频分析、图像处理等）</li>
+<li>高流量网络通信</li>
+</ul>
+<p>2、数据传递</p>
+<ol>
+<li>结构化克隆算法</li>
+<li>Transferable 对象</li>
+</ol>
+<p>3、共享 Worker<br>防止重复专用 Worker 来降低系统的资源使用，创建一个整个站点或 app 的所有页面实例都可以共享的中心 Worker 就非常有用了。<br>这称为 ShareWorker，可通过下面的方式创建</p>
+<pre><code>    var w1=new SharedWorker(&quot;http://some.url.1/mycoolworker.js&quot;);
+</code></pre>
+<p>因为共享 Worker 可以与站点的多个程序实例或者多个页面连接，所以这个 Worker 需要通过某种方式得知消息来自于哪个程序。这个唯一标识符称为端口（port），可以类比网络 socket 的端口。因此，调用程序必须使用 Worker 的 port 对象用于通信：</p>
+<pre><code>    w1.port.addEventListenner(&#39;message&#39;,handleMessage);
+    //..
+    w1.port.postMessage(&quot;something cool&quot;);
+</code></pre>
+<p>还有，端口连接必须要初始化，形式如下：</p>
+<pre><code>    w1.port.start();
+</code></pre>
+<p>4、模拟 Web Worker<br>JavaScript 的异步来自于事件循环队列，所以可使用定时器（setTimeout(…)等）强制模拟实现异步的伪 Worker。（<a target="_blank" rel="noopener" href="https://gist.github.com/getify/1b26accb1a09aa53ad25%EF%BC%89">https://gist.github.com/getify/1b26accb1a09aa53ad25）</a></p>
+<h4 id="SIMD"><a href="#SIMD" class="headerlink" title="SIMD"></a>SIMD</h4><p>单指令多数据（SIMD）是一种数据并行（data parallelism）方式，与 Web Worker 的任务并行（task parallelism）相对，因为这里的重点实际上不再是把程序逻辑分成并行的块，而是并行处理数据的多个位。</p>
+<h4 id="asm-js"><a href="#asm-js" class="headerlink" title="asm.js"></a>asm.js</h4><p>1、如何使用 asm.js 优化<br>2、asm.js 模块</p>
+<h4 id="小结-8"><a href="#小结-8" class="headerlink" title="小结"></a>小结</h4><p>异步编码模式使我们能够编写更高效的代码，通常能够带来非常大的改进。但是，异步特性本质上还是绑定在一个单事件循环线程上。</p>
+<p>Web Worker 可以在独立的线程运行一个 JavaScript 文件（即程序），使用异步事件在线程之间传递消息。非常适用于把长时间的或资源密集型的任务卸载到不同的线程中，以提高主 UI 线程的响应性。<br>SIMD 打算把 CPU 级的并行数学运算映射到 JavaScript API，以获得高性能的数据并行运算，比如在大数据集上的数字处理。<br>最后，asm.js 描述了 JavaScript 的一个很小的子集，它避免了 JavaScript 难以优化的部分（比如垃圾收集和强制类型转换），并且让 JavaScript 引擎识别并通过激进的优化运行这样的代码。可以手工编写 asm.js 但是会极端费力且容易出错，类似于手写汇编语言（这也是其名字的由来）。实际上，asm.js 也是高度优化的程序语言交叉编译的一个很好的目标</p>
+<h3 id="第-6-章：性能测试与调优"><a href="#第-6-章：性能测试与调优" class="headerlink" title="第 6 章：性能测试与调优"></a>第 6 章：性能测试与调优</h3><h4 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h4><p>1、重复<br>2、Benchmark.js</p>
+<h4 id="环境为王"><a href="#环境为王" class="headerlink" title="环境为王"></a>环境为王</h4><h4 id="jsPerf-com"><a href="#jsPerf-com" class="headerlink" title="jsPerf.com"></a>jsPerf.com</h4><h4 id="写好测试"><a href="#写好测试" class="headerlink" title="写好测试"></a>写好测试</h4><h4 id="微性能"><a href="#微性能" class="headerlink" title="微性能"></a>微性能</h4><h4 id="尾调用优化"><a href="#尾调用优化" class="headerlink" title="尾调用优化"></a>尾调用优化</h4><h4 id="小结-9"><a href="#小结-9" class="headerlink" title="小结"></a>小结</h4><p>对一段代码进行有效的性能测试，特别是与同样代码的另外一个选择对比来看看哪种方案更快，需要认真注意细节。<br>与其打造你自己的统计有效的性能测试逻辑，不如直接使用 Benchmark.js 库，它已经为你实现了这些。但是，编写测试要小心，因为我们很容易就会构造一个看似有效实际却有缺陷的测试，即使是微小的差异也可能扭曲结果，使其完全不可靠。<br>从尽可能多的环境中得到尽可能多的测试结果以消除硬件/设备的偏差，这一点很重要。jsPerf.com 是很好的网站，用于众包性能测试运行。<br>遗憾的是，很多常用的性能测试执迷于无关紧要的微观性能细节，比如 x++对比++x。编写好的测试意味着理解如何关注大局，比如关键路径上的优化以及避免落入类似不同的 JavaScript 实现细节这样的陷阱中。<br>尾调用优化是 ES6 要求的一种优化方法。它使 JavaScript 中原本不可能的一些递归模式变得实际。TCO 允许一个函数在结尾处调用另外一个函数来执行，不需要任何额外资源。这意味着，对递归算法来说，引擎不再需要限制栈深度。</p>
+
                 
             </div>
             <hr/>
@@ -877,8 +915,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">笔记</span>
+                                <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">读书笔记</span>
                                 </a>
                             
                         </div>
@@ -957,8 +995,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">笔记</span>
+                    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">读书笔记</span>
                     </a>
                     
                 </div>
