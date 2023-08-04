@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="element-plus【表格二次封装】, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
+    <meta name="keywords" content="element-plus【下拉二次封装-滚动加载】, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
     <meta name="description" content="laycoder.com，前端哒哒哒哒哒哒哒">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>element-plus【表格二次封装】 | lay coder</title>
+    <title>element-plus【下拉二次封装-滚动加载】 | lay coder</title>
     <link rel="icon" type="image/png" href="/medias/avatar.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">element-plus【表格二次封装】</h1>
+                    <h1 class="description center-align post-title">element-plus【下拉二次封装-滚动加载】</h1>
                 </div>
             </div>
         </div>
@@ -366,13 +366,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/element-plus/">
-                                <span class="chip bg-color">element-plus</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -384,7 +380,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-10
+                    2023-04-03
                 </div>
                 
 
@@ -405,201 +401,325 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code>&lt;template&gt;
-  &lt;div v-loading=&quot;loading&quot; class=&quot;zn-table-content&quot; :style=&quot;&#123; height &#125;&quot;&gt;
-    &lt;el-table ref=&quot;tableRef&quot; class=&quot;flex-1&quot; :class=&quot;&#123; &#39;hide-checkAll&#39;: hideDftCheckAll &amp;&amp; !headSelect &#125;&quot;
-    :data=&quot;data&quot;
-      @selection-change=&quot;handleSelectionChange&quot; v-bind=&quot;$attrs&quot;&gt;
-      &lt;el-table-column v-if=&quot;showSelect&quot; type=&quot;selection&quot; width=&quot;55&quot; align=&quot;center&quot;&gt;
-        &lt;template #header&gt;
-          &lt;i&gt;&lt;/i&gt;
-        &lt;/template&gt;
-        &lt;template #default=&quot;scope&quot;&gt;
-          &lt;slot name=&quot;select&quot; v-bind=&quot;scope&quot;&gt;
-            &lt;el-checkbox
-              :disabled=&quot;selectDisabled &amp;&amp; selectDisabled(scope.row)&quot;
-              :model-value=&quot;transferCheckedStatus(scope.store, scope.row)&quot;
-              @change=&quot;scope.store.toggleRowSelection(scope.row)&quot;
-            &gt;&lt;/el-checkbox&gt;
-          &lt;/slot&gt;
-        &lt;/template&gt;
-      &lt;/el-table-column&gt;
-      &lt;el-table-column v-if=&quot;showIndex&quot; label=&quot;序号&quot; type=&quot;index&quot; align=&quot;center&quot; width=&quot;70&quot;&gt;
-        &lt;template #default=&quot;&#123; $index, row &#125;&quot;&gt;&#123;&#123; indexFormat($index, row) &#125;&#125;&lt;/template&gt;
-      &lt;/el-table-column&gt;
-      &lt;slot&gt;&lt;/slot&gt;
-      &lt;template v-if=&quot;customEmpty&quot; #empty&gt;
-        &lt;div&gt;
-          &lt;el-empty v-if=&quot;!loading&quot; style=&quot;width: 100%; height: 100%&quot; /&gt;
-        &lt;/div&gt;
-      &lt;/template&gt;
-      &lt;template #append&gt;
-        &lt;slot name=&quot;append&quot;&gt; &lt;/slot&gt;
-        &lt;div v-if=&quot;data?.length &amp;&amp; showBatchDel&quot; class=&quot;flex al-center p-y-8 m-b-8&quot;&gt;
-          &lt;div v-if=&quot;showSelect&quot; style=&quot;width: 55px&quot; class=&quot;flex ju-center m-r-28&quot;&gt;
-            &lt;el-checkbox :model-value=&quot;checkAll&quot; :indeterminate=&quot;indeterminate&quot; class=&quot;table-check-all&quot; @change=&quot;handleCheckAll&quot;&gt;&lt;/el-checkbox&gt;
-          &lt;/div&gt;
-          &lt;slot name=&quot;batch-action&quot; :selection=&quot;multipleSelection&quot;&gt;
-            &lt;el-button :disabled=&quot;!multipleSelection?.length&quot; plain type=&quot;danger&quot; @click=&quot;handleBatchDel&quot;&gt;批量删除&lt;/el-button&gt;
-          &lt;/slot&gt;
-        &lt;/div&gt;
-      &lt;/template&gt;
-    &lt;/el-table&gt;
-    &lt;el-table v-if=&quot;summaryData?.length&quot; :data=&quot;summaryData&quot; :show-header=&quot;false&quot;&gt;
-      &lt;el-table-column v-if=&quot;showSelect&quot; width=&quot;55&quot;&gt;&lt;/el-table-column&gt;
-      &lt;el-table-column v-if=&quot;showIndex&quot; width=&quot;60&quot;&gt;&lt;/el-table-column&gt;
-      &lt;slot name=&quot;summary-columns&quot;&gt;
-        &lt;slot&gt;&lt;/slot&gt;
-      &lt;/slot&gt;
-      &lt;template #empty&gt;
-        &lt;i&gt;&lt;/i&gt;
-      &lt;/template&gt;
-    &lt;/el-table&gt;
-    &lt;div v-show=&quot;data?.length&quot; class=&quot;flex al-center&quot;&gt;
-      &lt;div v-if=&quot;showSelect &amp;&amp; !headSelect &amp;&amp; ((hideDftCheckAll &amp;&amp; !showBatchDel) || $slots.footer)&quot; style=&quot;width: 55px&quot; class=&quot;flex ju-center m-r-28 m-t-24&quot;&gt;
-        &lt;el-checkbox :model-value=&quot;checkAll&quot; :indeterminate=&quot;indeterminate&quot; class=&quot;table-check-all&quot; @change=&quot;handleCheckAll&quot;&gt;&lt;/el-checkbox&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;m-t-24&quot;&gt;
-        &lt;slot name=&quot;footer&quot; :selection=&quot;multipleSelection&quot;&gt;&lt;/slot&gt;
-      &lt;/div&gt;
-      &lt;el-pagination
-        v-if=&quot;showP&quot;
-        class=&quot;table-pagination m-t-24&quot;
-        :currentPage=&quot;tableQuery?.pageIndex&quot;
-        :page-size=&quot;tableQuery?.pageSize&quot;
-        :page-sizes=&quot;[20, 30, 50, 100, 200]&quot;
-        layout=&quot;total, sizes, prev, pager, next, jumper&quot;
-        :total=&quot;total ?? 0&quot;
-        @size-change=&quot;(v) =&gt; emit(&#39;handleSizeChange&#39;, v)&quot;
-        @current-change=&quot;(v) =&gt; emit(&#39;handleCurrentChange&#39;, v)&quot;
-      /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+                <h3 id="滚动加载-scroll-select-index-vue"><a href="#滚动加载-scroll-select-index-vue" class="headerlink" title="滚动加载 scroll-select/index.vue"></a>滚动加载 scroll-select/index.vue</h3><pre><code>&lt;template&gt;
+  &lt;el-select ref=&quot;selectRef&quot; :remote-method=&quot;handleSearch&quot; @visible-change=&quot;visibleChange&quot;&gt;
+    &lt;slot&gt;&lt;/slot&gt;
+  &lt;/el-select&gt;
 &lt;/template&gt;
 &lt;script setup&gt;
-import &#123; ref, watch &#125; from &quot;vue&quot;;
-
+import &#123; ref &#125; from &quot;vue&quot;;
 const props = defineProps(&#123;
-  tableQuery: &#123; type: Object, default: () =&gt; (&#123; pageIndex: 1, pageSize: 20 &#125;) &#125;,
-  data: Array,
-  summaryData: Array,
-  total: Number,
-  height: String,
-  showIndex: &#123; type: Boolean, default: false &#125;, // 是否显示序号列
-  showSelect: &#123; type: Boolean, default: false &#125;, // 是否显示checkbox
-  selectDisabled: Function, // 行选项checkbox禁用条件
-  selectDft: Function, // 行默认选中条件
-  headSelect: &#123; type: Boolean, default: false &#125;,
-  hideDftCheckAll: &#123; type: Boolean, default: true &#125;,
-  showP: &#123;
-    // 是否显示页码
+  loading: Boolean,
+  diffBottom: &#123;
+    type: Number,
+    default: 20
+  &#125;
+&#125;);
+const emit = defineEmits([&quot;loadMore&quot;, &quot;visible-change&quot;, &quot;remote-method&quot;]);
+const selectRef = ref();
+let dom, scrollTopLast, cacheKeyword;
+function handleSearch(value) &#123;
+  if (!value || cacheKeyword !== value) &#123;
+    scrollTopLast = undefined;
+    dom?.scrollTo(&#123; top: 0 &#125;);
+  &#125;
+  cacheKeyword = value;
+  emit(&quot;remote-method&quot;, value);
+&#125;
+function visibleChange(visible) &#123;
+  emit(&quot;visible-change&quot;, visible);
+  if (visible) &#123;
+    initScroll();
+  &#125; else &#123;
+    dom?.removeEventListener(&quot;scroll&quot;, scrollEvent);
+  &#125;
+&#125;
+function initScroll() &#123;
+  setTimeout(() =&gt; &#123;
+    dom = selectRef.value.scrollbar.wrapRef;
+    const selectedDom = dom.querySelector(&quot;.selected&quot;);
+    let top = 0;
+    if (selectedDom) &#123;
+      top = selectedDom.offsetTop - (dom.offsetHeight - 34);
+    &#125;
+    dom?.scrollTo(&#123; top &#125;);
+    scrollTopLast = undefined;
+    dom?.addEventListener(&quot;scroll&quot;, scrollEvent);
+  &#125;, 0);
+&#125;
+// eslint-disable-next-line object-curly-spacing
+function scrollEvent(&#123; target: &#123; offsetHeight, scrollHeight, scrollTop &#125; &#125;) &#123;
+  if (offsetHeight + scrollTop &gt; scrollHeight - props.diffBottom &amp;&amp; !props.loading &amp;&amp; (scrollTopLast === undefined || (scrollTopLast &amp;&amp; scrollTopLast &lt; scrollTop))) &#123;
+    scrollTopLast = scrollTop;
+    emit(&quot;loadMore&quot;);
+  &#125;
+&#125;
+&lt;/script&gt;
+</code></pre>
+<h3 id="基于滚动加载叠加远程搜索-scroll-select-v2-index-vue"><a href="#基于滚动加载叠加远程搜索-scroll-select-v2-index-vue" class="headerlink" title="基于滚动加载叠加远程搜索 scroll-select-v2/index.vue"></a>基于滚动加载叠加远程搜索 scroll-select-v2/index.vue</h3><pre><code>&lt;template&gt;
+  &lt;scroll-select
+    :loading=&quot;loading&quot;
+    :model-value=&quot;currentValue&quot;
+    loading-text=&quot;加载中...&quot;
+    no-match-text=&quot;未查询到数据&quot;
+    no-data-text=&quot;未查询到数据&quot;
+    clearable
+    filterable
+    fit-input-width
+    remote
+    reserve-keyword
+    remote-show-suffix
+    :allowCreate=&quot;allowCreate&quot;
+    @remote-method=&quot;handleSearch&quot;
+    @loadMore=&quot;loadMore&quot;
+    @clear=&quot;handleClear&quot;
+    @visible-change=&quot;visibleChange&quot;
+    @change=&quot;handleChange&quot;
+    :value-key=&quot;option.key&quot;
+  &gt;
+    &lt;slot :options=&quot;listData&quot;&gt;
+      &lt;el-option v-for=&quot;item in listData&quot; :key=&quot;item[option.key]&quot; :value=&quot;item&quot; :label=&quot;item._label&quot;&gt;
+        &lt;zy-tooltip :content=&quot;item._label&quot;&gt;&#123;&#123; item._label &#125;&#125;&lt;/zy-tooltip&gt;
+      &lt;/el-option&gt;
+    &lt;/slot&gt;
+  &lt;/scroll-select&gt;
+&lt;/template&gt;
+&lt;!-- 提示: 不需要远程搜索功能时，行内透传参数 remote 和 filterable 为 false 即可 --&gt;
+&lt;script setup name=&quot;scroll-select-v2&quot;&gt;
+import ScrollSelect from &quot;../scroll-select/index.vue&quot;;
+import &#123; onMounted, ref, watch &#125; from &quot;vue&quot;;
+const props = defineProps(&#123;
+  api: Function,
+  searchKey: &#123;
+    // 检索键值
+    type: String,
+    default: &quot;name&quot;
+  &#125;,
+  formatSearchKey: Function, // 格式化搜索参数
+  formatDataFc: Function, // 格式化数据的方法
+  defaultParams: Object, // 默认参数
+  modelValue: [String, Array],
+  allowCreate: Boolean,
+  tooltipPlacement: &#123; type: String, default: &quot;top-start&quot; &#125;,
+  init: &#123;
+    // 是否初始化第一页数据
     type: Boolean,
     default: true
   &#125;,
-  showBatchDel: &#123; type: Boolean, default: false &#125;, // 是否显示批量删除
-  loading: &#123; type: Boolean, default: false &#125;,
-  customEmpty: &#123; type: Boolean, default: true &#125; // 是否显示自定义空数据
-&#125;);
-const tableRef = ref();
-const emit = defineEmits([&quot;handleSizeChange&quot;, &quot;handleCurrentChange&quot;, &quot;handleBatchDel&quot;, &quot;handleSeleted&quot;]);
-watch(
-  () =&gt; props.tableQuery,
-  () =&gt; &#123;
-    tableRef.value?.setScrollTop(0);
+  defaultFirst: &#123;
+    // 是否默认选中第一项
+    type: Boolean,
+    default: false
   &#125;,
-  &#123; deep: true &#125;
+  option: &#123;
+    // option   value【key】及label【label】 的键值
+    type: Object,
+    default: () =&gt; (&#123;
+      key: &quot;id&quot;,
+      label: &quot;name&quot;
+    &#125;)
+  &#125;,
+  insertList: &#123;
+    // 回显时，避免浪费接口资源，直接插入要回显的数据
+    type: Array,
+    default: () =&gt; []
+  &#125;,
+  insertAppend: &#123; type: Boolean, default: false &#125;
+&#125;);
+const currentValue = ref(null);
+function setCurrentValue(v) &#123;
+  if (isArray(props.modelValue)) &#123;
+    currentValue.value = cacheListData.filter((item) =&gt; props.modelValue.includes(item[props.option.key]));
+  &#125; else if (props.modelValue) &#123;
+    const find = listData.value.find((item) =&gt; &#123;
+      return item[props.option.key] === v;
+    &#125;);
+    if (!find &amp;&amp; props.allowCreate) &#123;
+      currentValue.value = props.modelValue;
+    &#125; else &#123;
+      currentValue.value = find;
+    &#125;
+  &#125; else &#123;
+    currentValue.value = null;
+  &#125;
+  if (v !== props.modelValue) &#123;
+    emit(&quot;change&quot;, currentValue.value);
+  &#125;
+&#125;
+const emit = defineEmits([
+  &quot;update:modelValue&quot;, // 只给选中项的value值
+  &quot;update:total&quot;, // 只给选中项的value值
+  &quot;change&quot;,
+  &quot;update:data&quot;, // 给选中项的全部json对象
+  &quot;visibleChange&quot;,
+  &quot;clear&quot;
+]);
+const listData = ref([]);
+let cacheListData = [...props.insertList.map(formatLabel)],
+  cacheSearchList = [],
+  cacheNoMore = false;
+const listQuery = ref(&#123; pageIndex: 1, pageSize: 20 &#125;);
+const keyword = ref();
+let noMore = false;
+const loading = ref(false);
+onMounted(() =&gt; &#123;
+  props.init &amp;&amp; getListData();
+&#125;);
+watch(
+  () =&gt; JSON.stringify(props.defaultParams),
+  () =&gt; &#123;
+    reset();
+  &#125;
 );
 watch(
-  () =&gt; props.data,
-  (val) =&gt; &#123;
-    if (props.selectDft) &#123;
-      for (const item of val) &#123;
-        tableRef.value.toggleRowSelection(item, props.selectDft(item));
-      &#125;
-    &#125;
+  () =&gt; props.insertList,
+  () =&gt; &#123;
+    initData();
   &#125;
 );
-const multipleSelection = ref([]);
-
-// 多选
-function handleSelectionChange(val) &#123;
-  multipleSelection.value = val;
-  indeterminate.value = val.length &gt; 0 &amp;&amp; val.length &lt; props.data?.length;
-  checkAll.value = props.data?.length &gt; 0 &amp;&amp; val.length === props.data?.length;
-  emit(&quot;handleSeleted&quot;, multipleSelection.value);
+watch(() =&gt; props.modelValue, setCurrentValue);
+function reset() &#123;
+  listData.value = [];
+  cacheListData = [...props.insertList.map(formatLabel)];
+  keyword.value = undefined;
+  listQuery.value.pageIndex = 1;
+  props.init &amp;&amp; getListData();
 &#125;
-// 批量删除
-function handleBatchDel() &#123;
-  emit(&quot;handleBatchDel&quot;, multipleSelection.value);
-&#125;
-// 序号格式化
-function indexFormat(index, row) &#123;
-  if (row.rowIndex) &#123;
-    index = row.rowIndex;
-  &#125; else if (row.rowIndex === false) &#123;
-    return &quot;&quot;;
-  &#125;
-  const &#123; pageIndex = 1, pageSize = 20 &#125; = props.tableQuery;
-  return index + 1 + (pageIndex - 1) * pageSize;
-&#125;
-
-const indeterminate = ref(false);
-const checkAll = ref(false);
-function handleCheckAll() &#123;
-  tableRef.value.toggleAllSelection();
-&#125;
-
-// 弄选中状态
-function transferCheckedStatus(store, row) &#123;
-  const disabled = props.selectDisabled &amp;&amp; props.selectDisabled(row);
-  if (disabled &amp;&amp; store?.isSelected(row)) &#123;
-    store.toggleRowSelection(row);
-  &#125;
-  return store?.isSelected(row);
-&#125;
-defineExpose(&#123; tableRef, handleCheckAll &#125;);
-&lt;/script&gt;
-&lt;style lang=&quot;scss&quot;&gt;
-.zn-table-content &#123;
-  height: 100%;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  overflow: auto;
-
-  .hide-checkAll &#123;
-    thead &#123;
-      .el-table-column--selection &#123;
-        .el-checkbox &#123;
-          visibility: hidden;
+async function getListData() &#123;
+  if (!props.api) &#123;
+    console.warn(&quot;scroll-select-v2 组件 未定义api&quot;);
+  &#125; else &#123;
+    loading.value = true;
+    let query = &#123;
+      ...props.defaultParams,
+      ...listQuery.value,
+      [props.searchKey]: keyword.value
+    &#125;;
+    if (props.formatSearchKey) &#123;
+      query = &#123; ...query, ...props.formatSearchKey(keyword.value) &#125;;
+    &#125;
+    let &#123; ok, data, count &#125; = await props.api(query);
+    loading.value = false;
+    if (ok) &#123;
+      emit(&quot;update:total&quot;, count || data?.length || 0);
+      props.formatDataFc &amp;&amp; data?.length &amp;&amp; (data = props.formatDataFc(data || []));
+      let temp =
+        data?.filter((i) =&gt; &#123;
+          const find = listData.value.find((j) =&gt; j[props.option.key] === i[props.option.key]);
+          if (!find) &#123;
+            i._label = formatLabel(i)._label;
+            if (!cacheListData.find((j) =&gt; j[props.option.key] === i[props.option.key])) &#123;
+              cacheListData.push(i);
+            &#125;
+          &#125;
+          return !find;
+        &#125;) || [];
+      if (keyword.value) &#123;
+        noMore = ~~data?.length &lt; listQuery.value.pageSize;
+        cacheSearchList.push(...temp);
+        listData.value = [...cacheSearchList];
+      &#125; else &#123;
+        initData();
+        cacheNoMore = noMore = ~~data?.length &lt; listQuery.value.pageSize;
+        if (props.modelValue) &#123;
+          if (isArray(props.modelValue)) &#123;
+            const _value = listData.value.filter((item) =&gt; props.modelValue.includes(item[props.option.key]));
+            if (_value.length &lt; props.modelValue.length) &#123;
+              loadMore();
+            &#125;
+            handleChange(_value);
+          &#125; else &#123;
+            const find = listData.value.find((item) =&gt; item[props.option.key] === props.modelValue);
+            if (find) &#123;
+              handleChange(find);
+            &#125; else &#123;
+              loadMore();
+            &#125;
+          &#125;
+        &#125;
+        if (!props.modelValue &amp;&amp; props.defaultFirst) &#123;
+          handleChange(listData.value[0]);
         &#125;
       &#125;
-    &#125;
-  &#125;
-
-  .table-check-all &#123;
-    position: relative;
-
-    &amp;::after &#123;
-      position: absolute;
-      content: &quot;全选&quot;;
-      transform: translateX(calc(50% + 8px));
-    &#125;
-  &#125;
-
-  .table-pagination &#123;
-    margin-left: auto;
-  &#125;
-
-  .el-button &#123;
-    &amp;.is-text &#123;
-      + .el-button &#123;
-        margin-left: 0;
-      &#125;
+    &#125; else &#123;
+      noMore = true;
     &#125;
   &#125;
 &#125;
-&lt;/style&gt;
+function loadMore() &#123;
+  if (!noMore &amp;&amp; !loading.value) &#123;
+    listQuery.value.pageIndex++;
+    getListData();
+  &#125;
+&#125;
+function handleSearch(value) &#123;
+  if (value) &#123;
+    cacheSearchList = [];
+    keyword.value = value;
+    listQuery.value.pageIndex = 1;
+    listData.value = [];
+    getListData();
+  &#125; else &#123;
+    visibleChange(false);
+  &#125;
+&#125;
+function visibleChange(show) &#123;
+  if (!props.modelValue) &#123;
+    if (show) &#123;
+      initData();
+      noMore = cacheNoMore;
+    &#125; else &#123;
+      keyword.value = undefined;
+    &#125;
+  &#125;
+  if (!show) &#123;
+    keyword.value = undefined;
+    initData();
+    noMore = cacheNoMore;
+  &#125;
+  emit(&quot;visibleChange&quot;, show);
+&#125;
+function handleClear() &#123;
+  emit(&quot;clear&quot;);
+  keyword.value = undefined;
+  listQuery.value.pageIndex = 1;
+  initData();
+  noMore = cacheNoMore;
+&#125;
+function initData() &#123;
+  const temp = cacheListData?.filter((i) =&gt; !props.insertList.find((j) =&gt; j[props.option.key] === i[props.option.key])) || [];
+  if (props.insertAppend) &#123;
+    listData.value = [...temp, ...props.insertList.map(formatLabel)];
+  &#125; else &#123;
+    listData.value = [...props.insertList.map(formatLabel), ...temp];
+  &#125;
+&#125;
+function handleChange(item) &#123;
+  let val = item?.[props.option.key];
+  if (isArray(item)) &#123;
+    val = item.map((_i) =&gt; _i[props.option.key]);
+  &#125;
+  currentValue.value = item;
+  emit(&quot;update:modelValue&quot;, val);
+  emit(&quot;update:data&quot;, item);
+  if (val !== props.modelValue) &#123;
+    emit(&quot;change&quot;, item);
+  &#125;
+&#125;
+function isArray(obj) &#123;
+  return Object.prototype.toString.call(obj) === &quot;[object Array]&quot;;
+&#125;
+function formatLabel(i) &#123;
+  const _label = props.option.label
+    .split(&quot;,&quot;)
+    .map((key) =&gt; i[key])
+    .filter((i) =&gt; i)
+    .join(&quot;-&quot;);
+  return &#123; ...i, _label &#125;;
+&#125;
+
+defineExpose(&#123; reset, initData, setCurrentValue &#125;);
+&lt;/script&gt;
 </code></pre>
 
                 
@@ -614,11 +734,7 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/element-plus/">
-                                    <span class="chip bg-color">element-plus</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -661,13 +777,13 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/08/04/element-plus%E3%80%90%E5%B8%B8%E7%94%A8%E8%A1%A8%E6%A0%BCcurd%E5%8A%9F%E8%83%BDhooks%E5%B0%81%E8%A3%85%E3%80%91/">
+                <a href="/2023/04/10/element-plus%E3%80%90%E8%A1%A8%E6%A0%BC%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="element-plus【常用表格curd功能hooks封装】">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="element-plus【表格二次封装】">
                         
-                        <span class="card-title">element-plus【常用表格curd功能hooks封装】</span>
+                        <span class="card-title">element-plus【表格二次封装】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -678,7 +794,7 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-08-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-10
                         </span>
                         <span class="publish-author">
                             
@@ -687,6 +803,14 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/element-plus/">
+                        <span class="chip bg-color">element-plus</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -698,13 +822,13 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/03/element-plus%E3%80%90%E4%B8%8B%E6%8B%89%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85-%E6%BB%9A%E5%8A%A8%E5%8A%A0%E8%BD%BD%E3%80%91/">
+                <a href="/2023/02/01/%E6%A0%91%E5%BD%A2%E6%95%B0%E6%8D%AE%E7%AD%9B%E9%80%89/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="element-plus【下拉二次封装-滚动加载】">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="树形数据筛选">
                         
-                        <span class="card-title">element-plus【下拉二次封装-滚动加载】</span>
+                        <span class="card-title">树形数据筛选</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -715,15 +839,27 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-01
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            laycoder
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Javascript/" class="post-category">
+                                    Javascript
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%87%E5%BF%98/">
+                        <span class="chip bg-color">备忘</span>
+                    </a>
+                    
                 </div>
                 
             </div>

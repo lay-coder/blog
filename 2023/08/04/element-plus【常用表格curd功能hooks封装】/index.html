@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="element-plus【表格二次封装】, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
+    <meta name="keywords" content="element-plus【常用表格curd功能hooks封装】, 楠神,laycoder,个人博客,个人网站,www.laycoder.com,楠神嘚儿驾">
     <meta name="description" content="laycoder.com，前端哒哒哒哒哒哒哒">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>element-plus【表格二次封装】 | lay coder</title>
+    <title>element-plus【常用表格curd功能hooks封装】 | lay coder</title>
     <link rel="icon" type="image/png" href="/medias/avatar.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">element-plus【表格二次封装】</h1>
+                    <h1 class="description center-align post-title">element-plus【常用表格curd功能hooks封装】</h1>
                 </div>
             </div>
         </div>
@@ -366,13 +366,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/element-plus/">
-                                <span class="chip bg-color">element-plus</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -384,7 +380,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-10
+                    2023-08-04
                 </div>
                 
 
@@ -405,201 +401,381 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code>&lt;template&gt;
-  &lt;div v-loading=&quot;loading&quot; class=&quot;zn-table-content&quot; :style=&quot;&#123; height &#125;&quot;&gt;
-    &lt;el-table ref=&quot;tableRef&quot; class=&quot;flex-1&quot; :class=&quot;&#123; &#39;hide-checkAll&#39;: hideDftCheckAll &amp;&amp; !headSelect &#125;&quot;
-    :data=&quot;data&quot;
-      @selection-change=&quot;handleSelectionChange&quot; v-bind=&quot;$attrs&quot;&gt;
-      &lt;el-table-column v-if=&quot;showSelect&quot; type=&quot;selection&quot; width=&quot;55&quot; align=&quot;center&quot;&gt;
-        &lt;template #header&gt;
-          &lt;i&gt;&lt;/i&gt;
-        &lt;/template&gt;
-        &lt;template #default=&quot;scope&quot;&gt;
-          &lt;slot name=&quot;select&quot; v-bind=&quot;scope&quot;&gt;
-            &lt;el-checkbox
-              :disabled=&quot;selectDisabled &amp;&amp; selectDisabled(scope.row)&quot;
-              :model-value=&quot;transferCheckedStatus(scope.store, scope.row)&quot;
-              @change=&quot;scope.store.toggleRowSelection(scope.row)&quot;
-            &gt;&lt;/el-checkbox&gt;
-          &lt;/slot&gt;
-        &lt;/template&gt;
-      &lt;/el-table-column&gt;
-      &lt;el-table-column v-if=&quot;showIndex&quot; label=&quot;序号&quot; type=&quot;index&quot; align=&quot;center&quot; width=&quot;70&quot;&gt;
-        &lt;template #default=&quot;&#123; $index, row &#125;&quot;&gt;&#123;&#123; indexFormat($index, row) &#125;&#125;&lt;/template&gt;
-      &lt;/el-table-column&gt;
-      &lt;slot&gt;&lt;/slot&gt;
-      &lt;template v-if=&quot;customEmpty&quot; #empty&gt;
-        &lt;div&gt;
-          &lt;el-empty v-if=&quot;!loading&quot; style=&quot;width: 100%; height: 100%&quot; /&gt;
-        &lt;/div&gt;
-      &lt;/template&gt;
-      &lt;template #append&gt;
-        &lt;slot name=&quot;append&quot;&gt; &lt;/slot&gt;
-        &lt;div v-if=&quot;data?.length &amp;&amp; showBatchDel&quot; class=&quot;flex al-center p-y-8 m-b-8&quot;&gt;
-          &lt;div v-if=&quot;showSelect&quot; style=&quot;width: 55px&quot; class=&quot;flex ju-center m-r-28&quot;&gt;
-            &lt;el-checkbox :model-value=&quot;checkAll&quot; :indeterminate=&quot;indeterminate&quot; class=&quot;table-check-all&quot; @change=&quot;handleCheckAll&quot;&gt;&lt;/el-checkbox&gt;
-          &lt;/div&gt;
-          &lt;slot name=&quot;batch-action&quot; :selection=&quot;multipleSelection&quot;&gt;
-            &lt;el-button :disabled=&quot;!multipleSelection?.length&quot; plain type=&quot;danger&quot; @click=&quot;handleBatchDel&quot;&gt;批量删除&lt;/el-button&gt;
-          &lt;/slot&gt;
-        &lt;/div&gt;
-      &lt;/template&gt;
-    &lt;/el-table&gt;
-    &lt;el-table v-if=&quot;summaryData?.length&quot; :data=&quot;summaryData&quot; :show-header=&quot;false&quot;&gt;
-      &lt;el-table-column v-if=&quot;showSelect&quot; width=&quot;55&quot;&gt;&lt;/el-table-column&gt;
-      &lt;el-table-column v-if=&quot;showIndex&quot; width=&quot;60&quot;&gt;&lt;/el-table-column&gt;
-      &lt;slot name=&quot;summary-columns&quot;&gt;
-        &lt;slot&gt;&lt;/slot&gt;
-      &lt;/slot&gt;
-      &lt;template #empty&gt;
-        &lt;i&gt;&lt;/i&gt;
-      &lt;/template&gt;
-    &lt;/el-table&gt;
-    &lt;div v-show=&quot;data?.length&quot; class=&quot;flex al-center&quot;&gt;
-      &lt;div v-if=&quot;showSelect &amp;&amp; !headSelect &amp;&amp; ((hideDftCheckAll &amp;&amp; !showBatchDel) || $slots.footer)&quot; style=&quot;width: 55px&quot; class=&quot;flex ju-center m-r-28 m-t-24&quot;&gt;
-        &lt;el-checkbox :model-value=&quot;checkAll&quot; :indeterminate=&quot;indeterminate&quot; class=&quot;table-check-all&quot; @change=&quot;handleCheckAll&quot;&gt;&lt;/el-checkbox&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;m-t-24&quot;&gt;
-        &lt;slot name=&quot;footer&quot; :selection=&quot;multipleSelection&quot;&gt;&lt;/slot&gt;
-      &lt;/div&gt;
-      &lt;el-pagination
-        v-if=&quot;showP&quot;
-        class=&quot;table-pagination m-t-24&quot;
-        :currentPage=&quot;tableQuery?.pageIndex&quot;
-        :page-size=&quot;tableQuery?.pageSize&quot;
-        :page-sizes=&quot;[20, 30, 50, 100, 200]&quot;
-        layout=&quot;total, sizes, prev, pager, next, jumper&quot;
-        :total=&quot;total ?? 0&quot;
-        @size-change=&quot;(v) =&gt; emit(&#39;handleSizeChange&#39;, v)&quot;
-        @current-change=&quot;(v) =&gt; emit(&#39;handleCurrentChange&#39;, v)&quot;
-      /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/template&gt;
-&lt;script setup&gt;
-import &#123; ref, watch &#125; from &quot;vue&quot;;
+                <p>###基于表格封装 hooks 封装</p>
+<pre><code>import _Table from &quot;@/components/zn-table/index.vue&quot;;
+import &#123; ElLoading, ElMessage, ElMessageBox &#125; from &quot;element-plus&quot;;
+import &#123; downloadFile, obj2Formdata, selectLocalFile, typeCheck &#125; from &quot;@/utils/utils&quot;;
+import &#123; fileType &#125; from &quot;@/constant&quot;;
+import debounce from &quot;@/utils/debounce&quot;;
+import &#123; ref, reactive, toRefs, onBeforeMount, h &#125; from &quot;vue&quot;;
 
-const props = defineProps(&#123;
-  tableQuery: &#123; type: Object, default: () =&gt; (&#123; pageIndex: 1, pageSize: 20 &#125;) &#125;,
-  data: Array,
-  summaryData: Array,
-  total: Number,
-  height: String,
-  showIndex: &#123; type: Boolean, default: false &#125;, // 是否显示序号列
-  showSelect: &#123; type: Boolean, default: false &#125;, // 是否显示checkbox
-  selectDisabled: Function, // 行选项checkbox禁用条件
-  selectDft: Function, // 行默认选中条件
-  headSelect: &#123; type: Boolean, default: false &#125;,
-  hideDftCheckAll: &#123; type: Boolean, default: true &#125;,
-  showP: &#123;
-    // 是否显示页码
-    type: Boolean,
-    default: true
-  &#125;,
-  showBatchDel: &#123; type: Boolean, default: false &#125;, // 是否显示批量删除
-  loading: &#123; type: Boolean, default: false &#125;,
-  customEmpty: &#123; type: Boolean, default: true &#125; // 是否显示自定义空数据
-&#125;);
-const tableRef = ref();
-const emit = defineEmits([&quot;handleSizeChange&quot;, &quot;handleCurrentChange&quot;, &quot;handleBatchDel&quot;, &quot;handleSeleted&quot;]);
-watch(
-  () =&gt; props.tableQuery,
-  () =&gt; &#123;
-    tableRef.value?.setScrollTop(0);
-  &#125;,
-  &#123; deep: true &#125;
-);
-watch(
-  () =&gt; props.data,
-  (val) =&gt; &#123;
-    if (props.selectDft) &#123;
-      for (const item of val) &#123;
-        tableRef.value.toggleRowSelection(item, props.selectDft(item));
+export const dialogTypeOpt = &#123;
+  create: &quot;create&quot;,
+  update: &quot;update&quot;,
+  detail: &quot;detail&quot;
+&#125;;
+
+/**
+* @param &#123;&#123;
+    * 	data:&#123;
+    * 		[string]:any
+    * 	&#125; // 需要初始化的变量
+    * 	methods:&#123;
+    * 		[string]:Function
+    * 	&#125; // 需要覆盖的方法
+    * 	apiOpt:&#123;
+    * 		detailIdKey:string // 详情id键值
+    * 		list:Promise // 列表接口
+    * 		create:Promise // 创建接口
+    * 		del:Promise // 删除接口
+    * 		detail:Promise // 详情接口
+    * 		update:Promise // 修改接口
+    * 		import:Promise // 导入接口
+    * 		download:Promise // 导出接口
+    * &#125;
+    * &#125;&#125; param
+* @returns
+*/
+export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&gt; &#123;
+  const formRef = ref();
+  const _data = reactive(&#123;
+    tableData: [],
+    tableQuery: &#123;
+      pageIndex: 1,
+      pageSize: 20
+    &#125;,
+    temp: &#123;&#125;,
+    dialogVisible: false,
+    total: 0,
+    tableLoading: false,
+    handleLoading: false,
+    dialogTypeOpt,
+    dialogType: &quot;&quot;,
+    dialogTitleMap: &#123;
+      [dialogTypeOpt.create]: &quot;新增&quot;,
+      [dialogTypeOpt.update]: &quot;修改&quot;,
+      [dialogTypeOpt.detail]: &quot;详情&quot;
+    &#125;,
+    fileName: null,
+    ...data
+  &#125;);
+  let debounceFun;
+  onBeforeMount(() =&gt; &#123;
+    _methods.fetchData();
+    _methods.getTableData();
+  &#125;);
+  const _methods = &#123;
+    handleSearch() &#123;
+      _data.tableQuery.pageIndex = 1;
+      _data.total = 0;
+      if (!debounceFun) &#123;
+        debounceFun = debounce(_methods.getTableData, 0);
       &#125;
-    &#125;
-  &#125;
-);
-const multipleSelection = ref([]);
-
-// 多选
-function handleSelectionChange(val) &#123;
-  multipleSelection.value = val;
-  indeterminate.value = val.length &gt; 0 &amp;&amp; val.length &lt; props.data?.length;
-  checkAll.value = props.data?.length &gt; 0 &amp;&amp; val.length === props.data?.length;
-  emit(&quot;handleSeleted&quot;, multipleSelection.value);
-&#125;
-// 批量删除
-function handleBatchDel() &#123;
-  emit(&quot;handleBatchDel&quot;, multipleSelection.value);
-&#125;
-// 序号格式化
-function indexFormat(index, row) &#123;
-  if (row.rowIndex) &#123;
-    index = row.rowIndex;
-  &#125; else if (row.rowIndex === false) &#123;
-    return &quot;&quot;;
-  &#125;
-  const &#123; pageIndex = 1, pageSize = 20 &#125; = props.tableQuery;
-  return index + 1 + (pageIndex - 1) * pageSize;
-&#125;
-
-const indeterminate = ref(false);
-const checkAll = ref(false);
-function handleCheckAll() &#123;
-  tableRef.value.toggleAllSelection();
-&#125;
-
-// 弄选中状态
-function transferCheckedStatus(store, row) &#123;
-  const disabled = props.selectDisabled &amp;&amp; props.selectDisabled(row);
-  if (disabled &amp;&amp; store?.isSelected(row)) &#123;
-    store.toggleRowSelection(row);
-  &#125;
-  return store?.isSelected(row);
-&#125;
-defineExpose(&#123; tableRef, handleCheckAll &#125;);
-&lt;/script&gt;
-&lt;style lang=&quot;scss&quot;&gt;
-.zn-table-content &#123;
-  height: 100%;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  overflow: auto;
-
-  .hide-checkAll &#123;
-    thead &#123;
-      .el-table-column--selection &#123;
-        .el-checkbox &#123;
-          visibility: hidden;
+      debounceFun();
+    &#125;,
+    showConfirm(cb) &#123;
+      ElMessageBox.confirm(&quot;是否确定此操作？&quot;, &quot;系统提示&quot;, &#123;
+        type: &quot;warning&quot;,
+        autofocus: false
+      &#125;)
+        .then(cb)
+        .catch();
+    &#125;,
+    // 查
+    async getTableData() &#123;
+      if (apiOpt?.list) &#123;
+        const query = _methods.getTableQuery();
+        if (query === false) &#123;
+          _data.total = 0;
+          _data.tableData = [];
+          return;
+        &#125;
+        _data.tableLoading = true;
+        const response = await apiOpt.list(query);
+        _methods.getTableDataNormalSuccess(response);
+      &#125; else &#123;
+        console.log(&quot;未定义list接口或getTableData方法&quot;);
+      &#125;
+    &#125;,
+    getTableQuery() &#123;
+      return _data.tableQuery;
+    &#125;,
+    // 校验并操作
+    handleConfirm() &#123;
+      formRef.value?.validate((valid) =&gt; &#123;
+        if (valid) &#123;
+          switch (_data.dialogType) &#123;
+            case dialogTypeOpt.create:
+              _methods.confirmCreate();
+              break;
+            case dialogTypeOpt.update:
+              _methods.confirmUpdate();
+              break;
+            default:
+              _methods.confirmHandle?.();
+              break;
+          &#125;
+        &#125;
+      &#125;);
+    &#125;,
+    confirmHandle() &#123;&#125;,
+    // 增
+    handleCreate() &#123;
+      _methods.resetTemp();
+      _data.dialogType = dialogTypeOpt.create;
+      _data.dialogVisible = true;
+    &#125;,
+    // 确定创建
+    async confirmCreate() &#123;
+      if (apiOpt?.create) &#123;
+        const query = _methods.getCreateQuery();
+        _data.handleLoading = true;
+        const response = await apiOpt.create(query).catch(() =&gt; (_data.handleLoading = false));
+        _methods.handleSuccess(response);
+      &#125; else &#123;
+        console.log(&quot;未定义create接口或confirmCreate方法&quot;);
+      &#125;
+    &#125;,
+    getCreateQuery() &#123;
+      return _data.temp;
+    &#125;,
+    // 删
+    handleDelete(data, cb) &#123;
+      _data.temp = data;
+      _methods.showConfirm(cb || _methods.confirmDelete);
+    &#125;,
+    // 批量删除
+    handleBatchDel(cb) &#123;
+      _methods.showConfirm(cb || _methods.confirmBatchDelete);
+    &#125;,
+    confirmBatchDelete() &#123;
+      console.log(&quot;未定义confirmBatchDelete方法&quot;);
+    &#125;,
+    // 确定删除
+    async confirmDelete() &#123;
+      if (apiOpt?.del) &#123;
+        const query = _methods.getDelQuery();
+        if (query === false) return;
+        const response = await apiOpt.del(query);
+        _methods.handleSuccess(response);
+      &#125; else &#123;
+        console.log(&quot;未定义del接口或confirmDelete方法&quot;);
+      &#125;
+    &#125;,
+    getDelQuery() &#123;
+      if (!_data.temp.id) &#123;
+        alert(&quot;找后端要列表id&quot;);
+        return false;
+      &#125;
+      return &#123; id: _data.temp.id &#125;;
+    &#125;,
+    // 改之前摇
+    async handleUpdateBefore(row, next) &#123;
+      const data = await _methods.getDetailData(row);
+      if (data === false) return;
+      _methods.handleUpdate(data, next);
+    &#125;,
+    async getDetailData(row) &#123;
+      if (apiOpt?.detail) &#123;
+        const query = _methods.getDetailQuery(row);
+        if (query === false) return;
+        const &#123; ok, data &#125; = await apiOpt.detail(query);
+        if (ok) &#123;
+          return data;
+        &#125;
+      &#125; else &#123;
+        console.log(&quot;未定义detail接口或handleUpdateBefore方法&quot;);
+      &#125;
+      return false;
+    &#125;,
+    getDetailQuery(&#123; id &#125;) &#123;
+      if (!id) &#123;
+        alert(&quot;找后端要列表id&quot;);
+        return false;
+      &#125;
+      return &#123; [apiOpt.detailIdKey || &quot;id&quot;]: id &#125;;
+    &#125;,
+    // 改
+    handleUpdate(row, next) &#123;
+      _methods.resetTemp();
+      _data.temp = &#123; ...row &#125;;
+      if (typeCheck(next) === &quot;[object Function]&quot; || typeCheck(next) === &quot;[object AsyncFunction]&quot;) &#123;
+        next(row);
+      &#125;
+      _data.dialogType = dialogTypeOpt.update;
+      _data.dialogVisible = true;
+    &#125;,
+    // 确定修改
+    async confirmUpdate() &#123;
+      if (apiOpt?.update) &#123;
+        const query = _methods.getUpdateQuery();
+        _data.handleLoading = true;
+        const response = await apiOpt.update(query).catch(() =&gt; (_data.handleLoading = false));
+        _methods.handleSuccess(response);
+      &#125; else &#123;
+        console.log(&quot;未定义update接口或confirmUpdate方法&quot;);
+      &#125;
+    &#125;,
+    getUpdateQuery() &#123;
+      return _data.temp;
+    &#125;,
+    // 增删改成功
+    handleSuccess(&#123; ok &#125;) &#123;
+      _data.handleLoading = false;
+      if (ok) &#123;
+        ElMessage.closeAll(&quot;success&quot;);
+        ElMessage.success(&quot;操作成功&quot;);
+        _data.dialogVisible = false;
+        _methods.getTableData();
+      &#125;
+    &#125;,
+    //详情
+    async handleDetails(row, next) &#123;
+      const data = await _methods.getDetailData(row);
+      if (data === false) return;
+      _methods.resetTemp();
+      _data.temp = &#123; ...data &#125;;
+      if (typeCheck(next) === &quot;[object Function]&quot; || typeCheck(next) === &quot;[object AsyncFunction]&quot;) &#123;
+        next(data);
+      &#125;
+      _data.dialogType = dialogTypeOpt.detail;
+      _data.dialogVisible = true;
+    &#125;,
+    getTableDataNormalSuccess(&#123; ok, data, count &#125;) &#123;
+      _data.tableLoading = false;
+      if (ok) &#123;
+        _data.tableData = data;
+        _data.total = count ?? data.length;
+      &#125; else &#123;
+        _data.tableData = [];
+      &#125;
+    &#125;,
+    // 页码
+    handleCurrentChange(pageIndex) &#123;
+      _data.tableQuery.pageIndex = pageIndex;
+      _methods.getTableData();
+    &#125;,
+    // 单页数据量
+    handleSizeChange(pageSize) &#123;
+      _data.tableQuery.pageIndex = 1;
+      _data.tableQuery.pageSize = pageSize;
+      _methods.getTableData();
+    &#125;,
+    resetTemp() &#123;
+      _data.temp = &#123;&#125;;
+      formRef.value?.resetFields();
+    &#125;,
+    reset() &#123;
+      _data.tableQuery = &#123;
+        pageIndex: 1,
+        pageSize: 20
+      &#125;;
+      _methods.getTableData();
+    &#125;,
+    async handleImport() &#123;
+      if (apiOpt?.import) &#123;
+        const file = await selectLocalFile(fileType.xlsx);
+        const query = _methods.getImportQuery(file);
+        _data.handleLoading = true;
+        const loading = ElLoading.service(&#123; lock: true, text: &quot;正在导入，请稍后&quot; &#125;);
+        const response = await apiOpt.import(obj2Formdata(query));
+        loading.close();
+        _methods.handleImportSuccess(response);
+      &#125; else &#123;
+        console.log(&quot;未定义import接口或handleImport方法&quot;);
+      &#125;
+    &#125;,
+    // 上传接口调用成功
+    handleImportSuccess(res) &#123;
+      _data.handleLoading = false;
+      const type = typeCheck(res);
+      switch (true) &#123;
+        case type === &quot;[object Object]&quot;:
+          _methods.handleImportSomeSuccess(res);
+          break;
+        case type === &quot;[object Blob]&quot; &amp;&amp; res.type.includes(&quot;json&quot;):
+          &#123;
+            const reader = new FileReader();
+            reader.readAsText(res, &quot;utf-8&quot;);
+            reader.onload = () =&gt; &#123;
+              _methods.handleImportSomeSuccess(JSON.parse(reader.result));
+            &#125;;
+          &#125;
+          break;
+        case type === &quot;[object Blob]&quot;:
+          _methods.getTableData();
+          ElMessageBox.alert(&quot;部分上传成功，请修改失败的部分重新上传&quot;, &quot;系统提示&quot;, &#123; autofocus: false, type: &quot;warning&quot; &#125;);
+          downloadFile(res, &quot;导入失败部分.xlsx&quot;);
+          break;
+        default:
+          break;
+      &#125;
+    &#125;,
+    // 上传内容部分成功
+    handleImportSomeSuccess(res) &#123;
+      const &#123; ok, data &#125; = res;
+      if (ok) &#123;
+        const &#123; errorCount &#125; = data || &#123;&#125;;
+        if (!errorCount) &#123;
+          // 全部成功，没有失败
+          _methods.handleSuccess(res);
+        &#125; else &#123;
+          // 部分成功，对失败部分处理成表格
+          ElMessageBox.alert(&quot;部分上传成功，请修改失败的部分重新上传&quot;, &quot;系统提示&quot;, &#123; autofocus: false, type: &quot;warning&quot; &#125;);
+          _methods.handleImportError(res);
         &#125;
       &#125;
-    &#125;
-  &#125;
-
-  .table-check-all &#123;
-    position: relative;
-
-    &amp;::after &#123;
-      position: absolute;
-      content: &quot;全选&quot;;
-      transform: translateX(calc(50% + 8px));
-    &#125;
-  &#125;
-
-  .table-pagination &#123;
-    margin-left: auto;
-  &#125;
-
-  .el-button &#123;
-    &amp;.is-text &#123;
-      + .el-button &#123;
-        margin-left: 0;
+    &#125;,
+    // 上传内容部分失败处理
+    handleImportError() &#123;
+      console.log(&quot;未定义handleImportError方法&quot;);
+    &#125;,
+    getImportQuery(file) &#123;
+      return &#123; file &#125;;
+    &#125;,
+    async handleDownload() &#123;
+      if (apiOpt?.download) &#123;
+        const query = _methods.getDownloadQuery();
+        _data.handleLoading = true;
+        // responseType: &quot;blob&quot;
+        const response = await apiOpt.download(query);
+        _data.handleLoading = false;
+        downloadFile(response, `$&#123;_data.fileName || Date.now()&#125;.xlsx`);
+        return Promise.resolve();
+      &#125; else &#123;
+        console.log(&quot;未定义download接口或handleDownload方法&quot;);
       &#125;
-    &#125;
-  &#125;
-&#125;
-&lt;/style&gt;
+    &#125;,
+    getDownloadQuery() &#123;
+      return null;
+    &#125;,
+    // 获取表格模板
+    async handleTemplate() &#123;
+      console.log(&quot;未定义handleTemplate方法&quot;);
+    &#125;,
+    fetchData() &#123;&#125;,
+    ...methods
+  &#125;;
+
+  const Table = (props, &#123; slots &#125;) =&gt; &#123;
+    return h(
+      _Table,
+      &#123;
+        data: _data.tableData,
+        total: _data.total,
+        tableQuery: _data.tableQuery,
+        loading: _data.tableLoading,
+        ...props,
+        onHandleSizeChange: _methods.handleSizeChange,
+        onHandleCurrentChange: _methods.handleCurrentChange,
+        onHandleBatchDel: _methods.handleBatchDel
+      &#125;,
+      slots
+    );
+  &#125;;
+
+  return &#123; Table, formRef, ...toRefs(_data), ..._methods &#125;;
+&#125;;
 </code></pre>
 
                 
@@ -614,11 +790,7 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/element-plus/">
-                                    <span class="chip bg-color">element-plus</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -657,9 +829,10 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2023/08/04/element-plus%E3%80%90%E5%B8%B8%E7%94%A8%E8%A1%A8%E6%A0%BCcurd%E5%8A%9F%E8%83%BDhooks%E5%B0%81%E8%A3%85%E3%80%91/">
                     <div class="card-image">
@@ -677,9 +850,9 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-08-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -688,6 +861,7 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -698,13 +872,13 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/03/element-plus%E3%80%90%E4%B8%8B%E6%8B%89%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85-%E6%BB%9A%E5%8A%A8%E5%8A%A0%E8%BD%BD%E3%80%91/">
+                <a href="/2023/04/10/element-plus%E3%80%90%E8%A1%A8%E6%A0%BC%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="element-plus【下拉二次封装-滚动加载】">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="element-plus【表格二次封装】">
                         
-                        <span class="card-title">element-plus【下拉二次封装-滚动加载】</span>
+                        <span class="card-title">element-plus【表格二次封装】</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -715,7 +889,7 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-10
                             </span>
                         <span class="publish-author">
                             
@@ -724,6 +898,14 @@ defineExpose(&#123; tableRef, handleCheckAll &#125;);
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/element-plus/">
+                        <span class="chip bg-color">element-plus</span>
+                    </a>
+                    
                 </div>
                 
             </div>
