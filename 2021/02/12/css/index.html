@@ -412,6 +412,308 @@
 </code></pre>
 <p> 页面使用时将设计稿的像素值/100=rem 数值</p>
 </li>
+<li><p>常用样式</p>
+<pre><code> /**
+ * 溢出省略号
+ * @param &#123;Number&#125; 行数
+ */
+ @mixin ellipsis($rowCount: 1) &#123;
+     overflow: hidden;
+     text-overflow: ellipsis;
+
+     @if $rowCount &lt;=1 &#123;
+         white-space: nowrap;
+     &#125; @else &#123;
+         min-width: 0;
+         display: -webkit-box;
+         -webkit-line-clamp: $rowCount;
+         -webkit-box-orient: vertical;
+     &#125;
+ &#125;
+
+ @for $i from 1 through 6 &#123;
+     .text-ellipsis-#&#123;$i&#125; &#123;
+         @include ellipsis($i);
+     &#125;
+ &#125;
+
+ .m-auto &#123;
+     margin-left: auto !important;
+     margin-right: auto !important;
+ &#125;
+
+ .m-l-auto &#123;
+     margin-left: auto !important;
+ &#125;
+
+ .m-r-auto &#123;
+     margin-right: auto !important;
+ &#125;
+
+ @for $i from 0 through 100 &#123;
+     // 只要双数和能被5除尽的数
+     @if $i % 2==0 or $i % 5==0 &#123;
+         // 得出：margin-30或者m-30
+         .margin-#&#123;$i&#125;,
+         .m-#&#123;$i&#125; &#123;
+             margin: $i + px !important;
+         &#125;
+
+         .m-x-#&#123;$i&#125; &#123;
+             margin-left: $i + px !important;
+             margin-right: $i + px !important;
+         &#125;
+
+         .m-y-#&#123;$i&#125; &#123;
+             margin-top: $i + px !important;
+             margin-bottom: $i + px !important;
+         &#125;
+
+         // 得出：padding-30或者p-30
+         .padding-#&#123;$i&#125;,
+         .p-#&#123;$i&#125; &#123;
+             padding: $i + px !important;
+         &#125;
+
+         .p-x-#&#123;$i&#125; &#123;
+             padding-left: $i + px !important;
+             padding-right: $i + px !important;
+         &#125;
+
+         .p-y-#&#123;$i&#125; &#123;
+             padding-top: $i + px !important;
+             padding-bottom: $i + px !important;
+         &#125;
+
+         @each $short, $long in l left, t top, r right, b bottom &#123;
+             // 缩写版，结果如： m-l-30
+             // 定义外边距
+             .m-#&#123;$short&#125;-#&#123;$i&#125; &#123;
+                 margin-#&#123;$long&#125;: $i + px !important;
+             &#125;
+
+             // 定义内边距
+             .p-#&#123;$short&#125;-#&#123;$i&#125; &#123;
+                 padding-#&#123;$long&#125;: $i + px !important;
+             &#125;
+
+             // 完整版，结果如：margin-left-30
+             // 定义外边距
+             .margin-#&#123;$long&#125;-#&#123;$i&#125; &#123;
+                 margin-#&#123;$long&#125;: $i + px !important;
+             &#125;
+
+             // 定义内边距
+             .padding-#&#123;$long&#125;-#&#123;$i&#125; &#123;
+                 padding-#&#123;$long&#125;: $i + px !important;
+             &#125;
+         &#125;
+     &#125;
+ &#125;
+
+ .flex &#123;
+     display: flex;
+ &#125;
+
+ .flex-col &#123;
+     display: flex;
+     flex-direction: column;
+ &#125;
+
+ .ju-start &#123;
+     justify-content: flex-start;
+ &#125;
+
+ .ju-end &#123;
+     justify-content: flex-end;
+ &#125;
+
+ .ju-center &#123;
+     justify-content: center;
+ &#125;
+
+ .ju-between &#123;
+     justify-content: space-between;
+ &#125;
+
+ .ju-around &#123;
+     justify-content: space-around;
+ &#125;
+
+ .ju-evenly &#123;
+     justify-content: space-evenly;
+ &#125;
+
+ .al-base &#123;
+     align-items: baseline;
+ &#125;
+
+ .al-center &#123;
+     align-items: center;
+ &#125;
+
+ .flex-wrap &#123;
+     flex-wrap: wrap;
+ &#125;
+
+ .al-start &#123;
+     align-items: flex-start;
+ &#125;
+
+ .al-end &#123;
+     align-items: flex-end;
+ &#125;
+
+ // 弹性盒占比 如flex:2
+
+ @for $i from 1 through 12 &#123;
+     .flex-#&#123;$i&#125; &#123;
+         flex: $i;
+     &#125;
+ &#125;
+
+ // 字体大小 如 font-size-14
+ @for $i from 12 through 30 &#123;
+     .font-size-#&#123;$i&#125; &#123;
+         font-size: $i + px;
+     &#125;
+ &#125;
+
+ // 百分比宽高 如w-100,h-100
+ @for $i from 5 through 100 &#123;
+     @if $i % 5==0 &#123;
+         .w-#&#123;$i&#125; &#123;
+             width: $i * 1% !important;
+         &#125;
+         .h-#&#123;$i&#125; &#123;
+             height: $i * 1% !important;
+         &#125;
+     &#125;
+ &#125;
+
+ .disabled &#123;
+     cursor: not-allowed;
+ &#125;
+
+ .pointer &#123;
+     cursor: pointer;
+ &#125;
+
+ .warning-tips &#123;
+     color: #e6a23c;
+ &#125;
+
+ .link-text &#123;
+     color: var(--el-color-primary);
+     cursor: pointer;
+ &#125;
+
+ .editable-cell &#123;
+     position: relative;
+ &#125;
+
+ .nowrap &#123;
+     white-space: nowrap;
+ &#125;
+
+ .zy-drawer &#123;
+     .filter-container &#123;
+         &amp;::after &#123;
+             content: unset;
+         &#125;
+     &#125;
+ &#125;
+
+ .filter-container &#123;
+     white-space: nowrap;
+     display: flex;
+     align-items: center;
+     flex-wrap: wrap;
+     position: relative;
+     margin-bottom: 12px;
+
+     &amp;::after &#123;
+         content: &quot;&quot;;
+         width: calc(100% + 28px);
+         height: 12px;
+         background: #f5f5f5;
+         position: absolute;
+         bottom: -12px;
+         left: -14px;
+     &#125;
+
+     .filter-item &#123;
+         margin-right: 12px;
+         margin-bottom: 14px;
+
+         &amp;.el-input,
+         &amp;.el-range-editor &#123;
+             flex: unset;
+             width: 220px;
+             display: inline-flex;
+         &#125;
+
+         &amp;.el-date-editor--daterange &#123;
+             width: 260px;
+         &#125;
+
+         &amp;.el-date-editor--datetimerange &#123;
+             width: 360px;
+         &#125;
+
+         &amp;.el-button &#123;
+             margin-left: 0;
+             &amp;:first-of-type &#123;
+                 margin-left: auto;
+             &#125;
+         &#125;
+
+         &amp;.el-cascader &#123;
+             .el-input &#123;
+                 height: 32px;
+             &#125;
+         &#125;
+     &#125;
+
+     + .handle-container,
+     + .zn-table-content &#123;
+         margin-top: 14px;
+     &#125;
+ &#125;
+
+ .handle-container &#123;
+     display: flex;
+     margin-bottom: 16px;
+ &#125;
+
+ .zn-content &#123;
+     display: flex;
+     flex-direction: column;
+     height: 100%;
+     flex: 1;
+     overflow: auto;
+     background-color: #fff;
+     box-sizing: border-box;
+     padding: 14px;
+     &gt; .zn-content &#123;
+         padding-left: 0;
+         padding-right: 0;
+     &#125;
+ &#125;
+
+ .text-a-c &#123;
+     text-align: center;
+ &#125;
+
+ .text-a-l &#123;
+     text-align: left;
+ &#125;
+
+ .text-a-r &#123;
+     text-align: right;
+ &#125;
+</code></pre>
+</li>
 </ol>
 
                 
