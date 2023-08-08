@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>element-plus【scrollbar次封装】</title>
+      <link href="/2023/08/08/element-plus%E3%80%90scrollbar%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/"/>
+      <url>/2023/08/08/element-plus%E3%80%90scrollbar%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/</url>
+      
+        <content type="html"><![CDATA[<pre><code>&lt;template&gt;  &lt;ElScrollbar class=&quot;w-100&quot; ref=&quot;scrollbarRef&quot; @scroll=&quot;handleScroll&quot;&gt;    &lt;slot&gt;&lt;/slot&gt;  &lt;/ElScrollbar&gt;&lt;/template&gt;&lt;script setup&gt;import &#123; ElScrollbar &#125; from &quot;element-plus&quot;;import &#123; throttle &#125; from &quot;lodash&quot;;import &#123; ref, computed, onMounted &#125; from &quot;vue&quot;;const emit = defineEmits([&quot;loadMore&quot;]);const el = computed(() =&gt; scrollbarRef.value.wrapRef);const scrollbarRef = ref();let observer;onMounted(async () =&gt; &#123;  observer = new MutationObserver(throttle(checkFull, 50));  observer.observe(el.value, &#123; childList: true, subtree: true &#125;);  checkFull();&#125;);function checkFull() &#123;  const &#123; clientHeight, scrollHeight &#125; = el.value;  if (clientHeight === 0) return;  if (scrollHeight &lt;= clientHeight) &#123;    emit(&quot;loadMore&quot;);  &#125; else &#123;    destroyObserver();  &#125;&#125;function destroyObserver() &#123;  observer.disconnect();  observer = null;&#125;function handleScroll() &#123;  if (observer) return;  const &#123; scrollTop, clientHeight, offsetTop, clientTop, scrollHeight &#125; = el.value;  if (scrollTop + clientHeight &gt;= offsetTop + clientTop + scrollHeight - 20) &#123;    emit(&quot;loadMore&quot;);  &#125;&#125;defineExpose(&#123;  instance: scrollbarRef&#125;);&lt;/script&gt;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> element-plus </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>element-plus【常用表格curd功能hooks封装】</title>
       <link href="/2023/05/04/element-plus%E3%80%90%E5%B8%B8%E7%94%A8%E8%A1%A8%E6%A0%BCcurd%E5%8A%9F%E8%83%BDhooks%E5%B0%81%E8%A3%85%E3%80%91/"/>
       <url>/2023/05/04/element-plus%E3%80%90%E5%B8%B8%E7%94%A8%E8%A1%A8%E6%A0%BCcurd%E5%8A%9F%E8%83%BDhooks%E5%B0%81%E8%A3%85%E3%80%91/</url>
