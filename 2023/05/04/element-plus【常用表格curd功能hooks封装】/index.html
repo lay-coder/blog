@@ -787,6 +787,50 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
   return &#123; Table, tableRef, formRef, ...toRefs(_data), ..._methods &#125;;
 &#125;;
 </code></pre>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><pre><code>&lt;template&gt;
+  &lt;div class=&quot;zn-content&quot;&gt;
+    &lt;div class=&quot;filter-container&quot;&gt;
+      &lt;el-select class=&quot;filter-item&quot;&gt;&lt;/el-select&gt;
+      &lt;el-input v-model.trim=&quot;tableQuery.name&quot; class=&quot;filter-item&quot; placeholder=&quot;&quot; clearable @clear=&quot;handleSearch&quot; @keyup.enter=&quot;handleSearch&quot;&gt; &lt;/el-input&gt;
+      &lt;el-button class=&quot;filter-item&quot; type=&quot;primary&quot; @click=&quot;handleSearch&quot;&gt;查询&lt;/el-button&gt;
+      &lt;el-button class=&quot;filter-item&quot; @click=&quot;reset&quot;&gt;重置&lt;/el-button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;handle-container&quot;&gt;
+      &lt;el-button type=&quot;primary&quot; @click=&quot;handleCreate&quot;&gt;新增&lt;/el-button&gt;
+    &lt;/div&gt;
+    &lt;Table showIndex&gt;
+      &lt;el-table-column label=&quot;&quot; prop=&quot;&quot; show-overflow-tooltip&gt;&lt;/el-table-column&gt;
+      &lt;el-table-column label=&quot;操作&quot; align=&quot;center&quot; fixed=&quot;right&quot; width=&quot;140&quot; #default=&quot;&#123; row &#125;&quot;&gt;
+        &lt;el-button link type=&quot;primary&quot; @click=&quot;handleUpdateBefore(row)&quot;&gt;修改&lt;/el-button&gt;
+        &lt;el-button link type=&quot;danger&quot; @click=&quot;handleDelete(row)&quot;&gt;删除&lt;/el-button&gt;
+      &lt;/el-table-column&gt;
+    &lt;/Table&gt;
+    &lt;zy-drawer :title=&quot;dialogTitleMap[dialogType]&quot; v-model=&quot;dialogVisible&quot; :okProps=&quot;&#123; loading: handleLoading &#125;&quot; @ok=&quot;handleConfirm&quot;&gt;
+      &lt;el-form ref=&quot;formRef&quot; :model=&quot;temp&quot; label-width=&quot;84&quot;&gt; &lt;/el-form&gt;
+    &lt;/zy-drawer&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;!--  --&gt;
+&lt;script setup&gt;
+import &#123; useTable &#125; from &quot;@/hooks/useTable&quot;;
+
+const apiOpt = &#123;
+  list: &quot;&quot;, // 列表接口
+  create: &quot;&quot;, // 新增接口
+  update: &quot;&quot;, // 修改接口
+  del: &quot;&quot;, // 删除接口
+  detail: &quot;&quot; // 详情接口
+&#125;;
+let &#123; formRef, Table, tableQuery, temp, tableData, dialogTitleMap, dialogType, dialogVisible, handleLoading, handleSearch, handleCreate, handleConfirm, handleUpdateBefore, handleDelete, reset &#125; =
+  useTable(&#123; apiOpt, methods: &#123; getTableData &#125; &#125;);
+
+// 假如要覆盖该方法
+function getTableData() &#123;
+  tableData.value = [&#123; id: 1 &#125;];
+&#125;
+&lt;/script&gt;
+</code></pre>
 
                 
             </div>
