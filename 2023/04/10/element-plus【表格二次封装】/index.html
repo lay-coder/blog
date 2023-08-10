@@ -407,13 +407,9 @@
             <div id="articleContent">
                 <pre><code>&lt;template&gt;
   &lt;div v-loading=&quot;loading&quot; class=&quot;zn-table-content&quot; :style=&quot;&#123; height &#125;&quot;&gt;
-    &lt;el-table ref=&quot;tableRef&quot; class=&quot;flex-1&quot; :class=&quot;&#123; &#39;hide-checkAll&#39;: hideDftCheckAll &amp;&amp; !headSelect &#125;&quot;
-    :data=&quot;data&quot;
-      @selection-change=&quot;handleSelectionChange&quot; v-bind=&quot;$attrs&quot;&gt;
-      &lt;el-table-column v-if=&quot;showSelect&quot; type=&quot;selection&quot; width=&quot;55&quot; align=&quot;center&quot;&gt;
-        &lt;template #header&gt;
-          &lt;i&gt;&lt;/i&gt;
-        &lt;/template&gt;
+    &lt;el-table ref=&quot;tableRef&quot; class=&quot;flex-1&quot; :class=&quot;&#123; &#39;hide-checkAll&#39;: hideDftCheckAll &amp;&amp; !headSelect &#125;&quot; 
+      row-key=&quot;id&quot; :data=&quot;data&quot; @selection-change=&quot;handleSelectionChange&quot; v-bind=&quot;$attrs&quot;&gt;
+      &lt;el-table-column v-if=&quot;showSelect&quot; type=&quot;selection&quot; reserve-selection width=&quot;55&quot; align=&quot;center&quot;&gt;
         &lt;template #default=&quot;scope&quot;&gt;
           &lt;slot name=&quot;select&quot; v-bind=&quot;scope&quot;&gt;
             &lt;el-checkbox
@@ -459,7 +455,7 @@
       &lt;div v-if=&quot;showSelect &amp;&amp; !headSelect &amp;&amp; ((hideDftCheckAll &amp;&amp; !showBatchDel) || $slots.footer)&quot; style=&quot;width: 55px&quot; class=&quot;flex ju-center m-r-28 m-t-24&quot;&gt;
         &lt;el-checkbox :model-value=&quot;checkAll&quot; :indeterminate=&quot;indeterminate&quot; class=&quot;table-check-all&quot; @change=&quot;handleCheckAll&quot;&gt;&lt;/el-checkbox&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;m-t-24&quot;&gt;
+      &lt;div v-if=&quot;$slots.footer&quot; class=&quot;m-t-24&quot;&gt;
         &lt;slot name=&quot;footer&quot; :selection=&quot;multipleSelection&quot;&gt;&lt;/slot&gt;
       &lt;/div&gt;
       &lt;el-pagination
@@ -509,16 +505,6 @@ watch(
   &#125;,
   &#123; deep: true &#125;
 );
-watch(
-  () =&gt; props.data,
-  (val) =&gt; &#123;
-    if (props.selectDft) &#123;
-      for (const item of val) &#123;
-        tableRef.value.toggleRowSelection(item, props.selectDft(item));
-      &#125;
-    &#125;
-  &#125;
-);
 const multipleSelection = ref([]);
 
 // 多选
@@ -555,9 +541,10 @@ function transferCheckedStatus(store, row) &#123;
   if (disabled &amp;&amp; store?.isSelected(row)) &#123;
     store.toggleRowSelection(row);
   &#125;
+  store.updateAllSelected();
   return store?.isSelected(row);
 &#125;
-defineExpose(&#123; tableRef, handleCheckAll &#125;);
+defineExpose(&#123; handleCheckAll, tableInstance: tableRef &#125;);
 &lt;/script&gt;
 &lt;style lang=&quot;scss&quot;&gt;
 .zn-table-content &#123;

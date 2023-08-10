@@ -405,7 +405,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="基于表格封装-hooks-封装"><a href="#基于表格封装-hooks-封装" class="headerlink" title="基于表格封装 hooks 封装"></a>基于表格封装 hooks 封装</h3><pre><code>import _Table from &quot;@/components/zn-table/index.vue&quot;;
+                <h3 id="基于表格封装-hooks-封装"><a href="#基于表格封装-hooks-封装" class="headerlink" title="基于表格封装 hooks 封装"></a>基于表格封装 hooks 封装</h3><pre><code>import _Table from &quot;@/components/zy-table/index.vue&quot;;
 import &#123; ElLoading, ElMessage, ElMessageBox &#125; from &quot;element-plus&quot;;
 import &#123; downloadFile, obj2Formdata, selectLocalFile, typeCheck &#125; from &quot;@/utils/utils&quot;;
 import &#123; fileType &#125; from &quot;@/constant&quot;;
@@ -440,7 +440,8 @@ export const dialogTypeOpt = &#123;
 * @returns
 */
 export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&gt; &#123;
-  const formRef = ref();
+  const formRef = ref(), // 表单实例
+    tableRef = ref(); // 表格实例
   const _data = reactive(&#123;
     tableData: [],
     tableQuery: &#123;
@@ -471,6 +472,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
     handleSearch() &#123;
       _data.tableQuery.pageIndex = 1;
       _data.total = 0;
+      tableRef.value.tableInstance?.clearSelection();
       if (!debounceFun) &#123;
         debounceFun = debounce(_methods.getTableData, 0);
       &#125;
@@ -666,6 +668,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
     &#125;,
     resetTemp() &#123;
       _data.temp = &#123;&#125;;
+      _data.handleLoading = false;
       formRef.value?.resetFields();
     &#125;,
     reset() &#123;
@@ -673,6 +676,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
         pageIndex: 1,
         pageSize: 20
       &#125;;
+      tableRef.value.tableInstance?.clearSelection();
       _methods.getTableData();
     &#125;,
     async handleImport() &#123;
@@ -721,6 +725,8 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
         const &#123; errorCount &#125; = data || &#123;&#125;;
         if (!errorCount) &#123;
           // 全部成功，没有失败
+          ElMessage.closeAll(&quot;success&quot;);
+          ElMessage.success(&quot;导入成功&quot;);
           _methods.handleSuccess(res);
         &#125; else &#123;
           // 部分成功，对失败部分处理成表格
@@ -764,6 +770,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
     return h(
       _Table,
       &#123;
+        ref: tableRef,
         data: _data.tableData,
         total: _data.total,
         tableQuery: _data.tableQuery,
@@ -777,7 +784,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
     );
   &#125;;
 
-  return &#123; Table, formRef, ...toRefs(_data), ..._methods &#125;;
+  return &#123; Table, tableRef, formRef, ...toRefs(_data), ..._methods &#125;;
 &#125;;
 </code></pre>
 
