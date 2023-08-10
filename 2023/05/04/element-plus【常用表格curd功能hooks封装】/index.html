@@ -472,7 +472,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
     handleSearch() &#123;
       _data.tableQuery.pageIndex = 1;
       _data.total = 0;
-      tableRef.value.tableInstance?.clearSelection();
+      tableRef.value?.tableInstance?.clearSelection();
       if (!debounceFun) &#123;
         debounceFun = debounce(_methods.getTableData, 0);
       &#125;
@@ -676,7 +676,7 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
         pageIndex: 1,
         pageSize: 20
       &#125;;
-      tableRef.value.tableInstance?.clearSelection();
+      tableRef.value?.tableInstance?.clearSelection();
       _methods.getTableData();
     &#125;,
     async handleImport() &#123;
