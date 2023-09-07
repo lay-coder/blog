@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>element-plus【tooltip二次封装】</title>
+      <link href="/2023/09/07/element-plus%E3%80%90tooltip%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/"/>
+      <url>/2023/09/07/element-plus%E3%80%90tooltip%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/</url>
+      
+        <content type="html"><![CDATA[<pre><code>&lt;template&gt;  &lt;div v-if=&quot;!isShow&quot; class=&quot;text-ellipsis-1&quot; v-bind=&quot;$attrs&quot; @mouseenter=&quot;isShowToltip&quot; @mouseout=&quot;hideTip&quot;&gt;    &lt;slot&gt;&lt;/slot&gt;  &lt;/div&gt;  &lt;el-tooltip v-else effect=&quot;dark&quot; :content=&quot;content&quot; placement=&quot;top&quot;&gt;    &lt;div class=&quot;text-ellipsis-1&quot; v-bind=&quot;$attrs&quot;&gt;      &lt;slot&gt;&lt;/slot&gt;    &lt;/div&gt;  &lt;/el-tooltip&gt;&lt;/template&gt;&lt;script setup&gt;import &#123; textRange &#125; from &quot;@/utils/utils&quot;;import &#123; ref &#125; from &quot;vue&quot;;defineProps([&quot;content&quot;]);const isShow = ref(false);function isShowToltip(e) &#123;  const bool = textRange(e.target);  isShow.value = bool;&#125;function hideTip() &#123;  isShow.value = false;&#125;&lt;/script&gt;</code></pre><p>// 判断元素节点是否超出</p><pre><code>export const textRange = (el) =&gt; &#123;  const textContent = el;  const targetW = textContent.getBoundingClientRect().width;  const range = document.createRange();  range.setStart(textContent, 0);  range.setEnd(textContent, textContent.childNodes.length);  const rangeWidth = range.getBoundingClientRect().width;  return rangeWidth &gt; targetW;&#125;;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> element-plus </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>element-plus【scrollbar二次封装】</title>
       <link href="/2023/08/08/element-plus%E3%80%90scrollbar%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/"/>
       <url>/2023/08/08/element-plus%E3%80%90scrollbar%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85%E3%80%91/</url>
