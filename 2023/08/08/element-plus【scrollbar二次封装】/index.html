@@ -415,7 +415,7 @@ import &#123; ElScrollbar &#125; from &quot;element-plus&quot;;
 import &#123; throttle &#125; from &quot;lodash&quot;;
 import &#123; ref, computed, onMounted &#125; from &quot;vue&quot;;
 
-const emit = defineEmits([&quot;loadMore&quot;]);
+const emit = defineEmits([&quot;loadMore&quot;, &quot;scroll&quot;]);
 const el = computed(() =&gt; scrollbarRef.value.wrapRef);
 const scrollbarRef = ref();
 let observer;
@@ -437,7 +437,8 @@ function destroyObserver() &#123;
   observer.disconnect();
   observer = null;
 &#125;
-function handleScroll() &#123;
+function handleScroll(_) &#123;
+    emit(&quot;scroll&quot;, _);
   if (observer) return;
   const &#123; scrollTop, clientHeight, offsetTop, clientTop, scrollHeight &#125; = el.value;
   if (scrollTop + clientHeight &gt;= offsetTop + clientTop + scrollHeight - 20) &#123;
