@@ -667,13 +667,13 @@ export const useTable = (&#123; data, apiOpt, methods &#125; = &#123;&#125;) =&g
       _methods.getTableData();
     &#125;,
     resetTemp() &#123;
-      _data.temp = &#123; ...data.temp &#125;;
+      _data.temp = &#123; ...data?.temp &#125;;
       _data.handleLoading = false;
       formRef.value?.resetFields();
     &#125;,
     reset() &#123;
       _data.tableQuery = &#123;
-        ...data.tableQuery,
+        ...data?.tableQuery,
         pageIndex: 1,
         pageSize: 20
       &#125;;
