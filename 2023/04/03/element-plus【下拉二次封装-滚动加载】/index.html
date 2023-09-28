@@ -473,7 +473,7 @@ function scrollEvent(&#123; target: &#123; offsetHeight, scrollHeight, scrollTop
     remote
     reserve-keyword
     remote-show-suffix
-    :allowCreate=&quot;allowCreate&quot;
+        :allowCreate=&quot;allowCreate &amp;&amp; !listData?.length&quot;
     @remote-method=&quot;handleSearch&quot;
     @loadMore=&quot;loadMore&quot;
     @clear=&quot;handleClear&quot;
